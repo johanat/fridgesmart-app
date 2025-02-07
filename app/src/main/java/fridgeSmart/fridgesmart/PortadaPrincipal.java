@@ -1,5 +1,6 @@
 package fridgeSmart.fridgesmart;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
@@ -17,12 +18,20 @@ public class PortadaPrincipal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        ImageView iconoGestionAlimentos = findViewById(R.id.iconGestionAliementos);
+
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
         ImageView btnMenu = findViewById(R.id.btnMenu);
+
         btnMenu.setOnClickListener(view ->{
             drawerLayout.open();
+        });
 
+        iconoGestionAlimentos.setOnClickListener(view->{
+            Intent intent = new Intent(PortadaPrincipal.this, GestionAlimentos.class);
+            startActivity(intent);
         });
     }
 }
