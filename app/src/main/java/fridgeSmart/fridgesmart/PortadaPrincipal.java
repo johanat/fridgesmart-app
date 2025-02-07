@@ -20,11 +20,9 @@ public class PortadaPrincipal extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
         ImageView btnMenu = findViewById(R.id.btnMenu);
-
         btnMenu.setOnClickListener(view ->{
             drawerLayout.open();
 
         });
-
     }
 }
