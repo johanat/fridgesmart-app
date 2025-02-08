@@ -10,30 +10,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Carnes extends GestionAlimentos{
+public class Lacteos extends GestionAlimentos{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.carnes);
+        setContentView(R.layout.lacteos);
         ImageView regresar = findViewById(R.id.backButton);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         List<Item> itemList = new ArrayList<>();
-        itemList.add(new Item(R.drawable.carne_animada,"Carne",5));
-        itemList.add(new Item(R.drawable.pollo,"Pollo",3));
-        itemList.add(new Item(R.drawable.pescado,"Pescado",2));
-        itemList.add(new Item(R.drawable.salchicha,"Embutidos",6));
+        itemList.add(new Item(R.drawable.leche2,"Leche",4));
+        itemList.add(new Item(R.drawable.queso,"Queso",2));
+        itemList.add(new Item(R.drawable.yogurt,"Yogurt",5));
+        itemList.add(new Item(R.drawable.mantequilla,"Mantequilla",1));
+        itemList.add(new Item(R.drawable.helado,"Helados",2));
 
         regresar.setOnClickListener(view ->{
-            Intent retroceder = new Intent(Carnes.this, GestionAlimentos.class);
+            Intent retroceder = new Intent(Lacteos.this, GestionAlimentos.class);
             finish();
         });
 
-
-
-       ItemAdapter adapter = new ItemAdapter(itemList);
-       recyclerView.setAdapter(adapter);
+        ItemAdapter adapter = new ItemAdapter(itemList);
+        recyclerView.setAdapter(adapter);
     }
 }

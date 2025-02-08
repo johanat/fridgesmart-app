@@ -11,7 +11,7 @@ public class GestionAlimentos extends PortadaPrincipal{
         setContentView(R.layout.gestion_alimentos);
 
         LinearLayout iconoCarne = findViewById(R.id.icon_Carnes);
-
+        LinearLayout iconoLeche = findViewById(R.id.iconoLacteos);
         ImageView flechaRetroceder = findViewById(R.id.backButton);
 
         flechaRetroceder.setOnClickListener(view ->{
@@ -20,6 +20,10 @@ public class GestionAlimentos extends PortadaPrincipal{
         });
         iconoCarne.setOnClickListener(view -> {
             Intent intent = new Intent(GestionAlimentos.this, Carnes.class);
+            startActivity(intent);
+        });
+        iconoLeche.setOnClickListener(view ->{
+            Intent intent = new Intent(GestionAlimentos.this, Lacteos.class);
             startActivity(intent);
         });
 

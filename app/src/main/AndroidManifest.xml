@@ -24,6 +24,8 @@
 
         <activity android:name=".GestionAlimentos"/>
         <activity android:name=".Carnes"/>
+        <activity android:name=".Lacteos"/>
+
 
     </application>
 
