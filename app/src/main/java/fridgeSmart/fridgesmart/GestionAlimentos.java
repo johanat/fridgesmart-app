@@ -3,18 +3,25 @@ package fridgeSmart.fridgesmart;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
-
-import androidx.activity.EdgeToEdge;
+import android.widget.LinearLayout;
 
 public class GestionAlimentos extends PortadaPrincipal{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gestion_alimentos);
+
+        LinearLayout iconoCarne = findViewById(R.id.icon_Carnes);
+
         ImageView flechaRetroceder = findViewById(R.id.backButton);
 
         flechaRetroceder.setOnClickListener(view ->{
             Intent retroceder = new Intent(GestionAlimentos.this, PortadaPrincipal.class);
             finish();
         });
+        iconoCarne.setOnClickListener(view -> {
+            Intent intent = new Intent(GestionAlimentos.this, Carnes.class);
+            startActivity(intent);
+        });
+
     }
 }

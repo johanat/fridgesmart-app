@@ -3,6 +3,8 @@ package fridgeSmart.fridgesmart;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +21,8 @@ public class PortadaPrincipal extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        ImageView iconoGestionAlimentos = findViewById(R.id.iconGestionAliementos);
+        LinearLayout iconoGestionAlimentos = findViewById(R.id.iconGestionAliementos);
+
 
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
