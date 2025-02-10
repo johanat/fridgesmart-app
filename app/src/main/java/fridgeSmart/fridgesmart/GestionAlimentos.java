@@ -13,6 +13,8 @@ public class GestionAlimentos extends PortadaPrincipal{
         LinearLayout iconoCarne = findViewById(R.id.icon_Carnes);
         LinearLayout iconoLeche = findViewById(R.id.iconoLacteos);
         ImageView flechaRetroceder = findViewById(R.id.backButton);
+        LinearLayout iconoFrutas = findViewById(R.id.iconoFrutas);
+        LinearLayout iconoVerduras = findViewById(R.id.iconoVerduras);
 
         flechaRetroceder.setOnClickListener(view ->{
             Intent retroceder = new Intent(GestionAlimentos.this, PortadaPrincipal.class);
@@ -26,6 +28,14 @@ public class GestionAlimentos extends PortadaPrincipal{
             Intent intent = new Intent(GestionAlimentos.this, Lacteos.class);
             startActivity(intent);
         });
+        iconoFrutas.setOnClickListener( view ->{
+            Intent intent = new Intent(GestionAlimentos.this, Frutas.class);
+            startActivity(intent);
+        });
 
+        iconoVerduras.setOnClickListener(view ->{
+            Intent intent = new Intent(GestionAlimentos.this, Verduras.class);
+            startActivity(intent);
+        });
     }
 }

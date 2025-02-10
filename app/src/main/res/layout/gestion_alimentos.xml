@@ -8,7 +8,7 @@
     <!-- Franja superior -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="98dp"
         android:orientation="horizontal"
         android:gravity="center"
         android:background="#316986"> <!-- Color de fondo -->
@@ -164,6 +164,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/iconoVerduras"
                 android:layout_width="110dp"
                 android:layout_height="120dp"
                 android:orientation="vertical"
