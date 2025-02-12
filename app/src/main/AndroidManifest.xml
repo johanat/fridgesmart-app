@@ -21,6 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".GestionAlimentos"/>
+        <activity android:name=".Carnes"/>
+        <activity android:name=".Lacteos"/>
+        <activity android:name=".Frutas"/>
+        <activity android:name=".Verduras"/>
     </application>
 
 </manifest>
