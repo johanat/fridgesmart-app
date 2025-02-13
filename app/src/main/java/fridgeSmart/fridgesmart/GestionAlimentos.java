@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class GestionAlimentos extends PortadaPrincipal{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,6 +17,10 @@ public class GestionAlimentos extends PortadaPrincipal{
         ImageView flechaRetroceder = findViewById(R.id.backButton);
         LinearLayout iconoFrutas = findViewById(R.id.iconoFrutas);
         LinearLayout iconoVerduras = findViewById(R.id.iconoVerduras);
+        FloatingActionButton iconAgregar = findViewById(R.id.btnAgregar);
+        FloatingActionButton iconoEliminar = findViewById(R.id.btnEliminar);
+        FloatingActionButton iconoModificar = findViewById(R.id.btnModificar);
+
 
         flechaRetroceder.setOnClickListener(view ->{
             Intent retroceder = new Intent(GestionAlimentos.this, PortadaPrincipal.class);
