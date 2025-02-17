@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Franja superior -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="98dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#316986"
+        tools:ignore="MissingConstraints"> <!-- Color de fondo -->
+
+        <!-- Icono de retroceso -->
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/flechavolver"
+            android:layout_centerVertical="true"
+            android:contentDescription="Volver"
+            app:tint="#FFFFFF" />
+
+        <!-- Texto centrado -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CONTROL DE TEMPERATURAS"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <!-- Contenedor principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Barra superior -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="170dp"
+            android:layout_marginBottom="46dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:id="@+id/temp_Carnes"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="36dp"
+                android:backgroundTint="#bbd7d7"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold"
+                    android:text="CARNE">
+                </TextView>
+
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/tempcarne">
+                </ImageView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/temp_Lacteos"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_gravity="center"
+                android:backgroundTint="#bbd7d7"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold"
+                    android:text="LACTEOS" />
+
+
+                <ImageView
+                    android:id="@+id/icon_leche"
+                    android:layout_width="200dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/templacteos">
+                </ImageView>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:layout_marginBottom="46dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/temp_frutas"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#bbd7d7"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:text="FRUTAS Y VERDURAS">
+            </TextView>
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/tempfrutas">
+            </ImageView>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Consejo -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="28dp"
+            android:gravity="center"
+            android:text="💡La temperatura general recomendada para el refrigerador es de 4°C o menos, y para el congelador -18°C o menos."
+            android:textSize="20sp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
