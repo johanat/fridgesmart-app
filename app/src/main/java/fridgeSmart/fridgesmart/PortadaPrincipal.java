@@ -22,6 +22,7 @@ public class PortadaPrincipal extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         LinearLayout iconoGestionAlimentos = findViewById(R.id.iconGestionAliementos);
+        LinearLayout iconoControlTemperatura = findViewById(R.id.icono_temperatura);
 
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -34,6 +35,11 @@ public class PortadaPrincipal extends AppCompatActivity {
 
         iconoGestionAlimentos.setOnClickListener(view->{
             Intent intent = new Intent(PortadaPrincipal.this, GestionAlimentos.class);
+            startActivity(intent);
+        });
+
+        iconoControlTemperatura.setOnClickListener(view ->{
+            Intent intent = new Intent(PortadaPrincipal.this, ControlTemperaturas.class);
             startActivity(intent);
         });
     }

@@ -21,7 +21,6 @@ public class GestionAlimentos extends PortadaPrincipal{
         FloatingActionButton iconoEliminar = findViewById(R.id.btnEliminar);
         FloatingActionButton iconoModificar = findViewById(R.id.btnModificar);
 
-
         flechaRetroceder.setOnClickListener(view ->{
             Intent retroceder = new Intent(GestionAlimentos.this, PortadaPrincipal.class);
             finish();
