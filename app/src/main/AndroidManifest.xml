@@ -13,6 +13,21 @@
         android:theme="@style/Theme.FridgeSmart"
         tools:targetApi="31">
         <activity
+            android:name=".RecetaSopa"
+            android:exported="false" />
+        <activity
+            android:name=".RecetaPasta"
+            android:exported="false" />
+        <activity
+            android:name=".RecetaTortitas"
+            android:exported="false" />
+        <activity
+            android:name=".RecetaSalmon"
+            android:exported="false" />
+        <activity
+            android:name=".RecetasActivity"
+            android:exported="false" />
+        <activity
             android:name=".PortadaPrincipal"
             android:exported="true">
             <intent-filter>
@@ -21,7 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".GestionAlimentos"/>
         <activity android:name=".Carnes"/>
         <activity android:name=".Lacteos"/>
