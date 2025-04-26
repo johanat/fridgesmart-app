@@ -13,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 public class PortadaPrincipal extends AppCompatActivity {
+
     private DrawerLayout drawerLayout;
 
     @Override
@@ -23,6 +24,7 @@ public class PortadaPrincipal extends AppCompatActivity {
 
         LinearLayout iconoGestionAlimentos = findViewById(R.id.iconGestionAliementos);
         LinearLayout iconoControlTemperatura = findViewById(R.id.icono_temperatura);
+        LinearLayout iconoRecetas = findViewById(R.id.icono_recetas);
 
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -40,6 +42,11 @@ public class PortadaPrincipal extends AppCompatActivity {
 
         iconoControlTemperatura.setOnClickListener(view ->{
             Intent intent = new Intent(PortadaPrincipal.this, ControlTemperaturas.class);
+            startActivity(intent);
+        });
+
+        iconoRecetas.setOnClickListener(view -> {
+            Intent intent = new Intent(PortadaPrincipal.this, RecetasActivity.class);
             startActivity(intent);
         });
     }
