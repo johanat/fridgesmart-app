@@ -1,10 +1,9 @@
-package fridgeSmart.fridgesmart;
+package fridgeSmart.fridgesmart.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +11,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class PortadaPrincipal extends AppCompatActivity {
+import fridgeSmart.fridgesmart.R;
+
+public class PortadaPrincipalActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
 
@@ -36,17 +37,17 @@ public class PortadaPrincipal extends AppCompatActivity {
         });
 
         iconoGestionAlimentos.setOnClickListener(view->{
-            Intent intent = new Intent(PortadaPrincipal.this, GestionAlimentos.class);
+            Intent intent = new Intent(PortadaPrincipalActivity.this, GestionAlimentos.class);
             startActivity(intent);
         });
 
         iconoControlTemperatura.setOnClickListener(view ->{
-            Intent intent = new Intent(PortadaPrincipal.this, ControlTemperaturas.class);
+            Intent intent = new Intent(PortadaPrincipalActivity.this, ControlTemperaturasActivity.class);
             startActivity(intent);
         });
 
         iconoRecetas.setOnClickListener(view -> {
-            Intent intent = new Intent(PortadaPrincipal.this, RecetasActivity.class);
+            Intent intent = new Intent(PortadaPrincipalActivity.this, RecetasActivity.class);
             startActivity(intent);
         });
     }

@@ -1,27 +1,23 @@
-package fridgeSmart.fridgesmart;
+package fridgeSmart.fridgesmart.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-public class RecetaSopa extends AppCompatActivity {
+import fridgeSmart.fridgesmart.R;
 
-    @Override
+public class ControlTemperaturasActivity extends PortadaPrincipalActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_receta_sopa);
+        setContentView(R.layout.control_temperatura);
 
         ImageView flechaRetroceder = findViewById(R.id.backButton);
 
         flechaRetroceder.setOnClickListener(view ->{
-            Intent retroceder = new Intent(RecetaSopa.this, RecetasActivity.class);
+            Intent retroceder = new Intent(ControlTemperaturasActivity.this, PortadaPrincipalActivity.class);
             finish();
         });
 

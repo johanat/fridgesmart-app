@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart;
+package fridgeSmart.fridgesmart.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -15,26 +15,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Frutas extends GestionAlimentos{
+import fridgeSmart.fridgesmart.Item;
+import fridgeSmart.fridgesmart.ItemAdapter;
+import fridgeSmart.fridgesmart.R;
+
+public class VerdurasActivity extends GestionAlimentos {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.fruta);
+        setContentView(R.layout.verduras);
         ImageView regresar = findViewById(R.id.backButton);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         List<Item> itemList = new ArrayList<>();
-        itemList.add(new Item(R.drawable.mandarina, "Mandarinas", 4,"mandarina","FRUTAS"));
-        itemList.add(new Item(R.drawable.platano, "Platanos", 5,"platanos","FRUTAS"));
-        itemList.add(new Item(R.drawable.manzanas, "Manzanas", 0,"manzanas","FRUTAS"));
-        itemList.add(new Item(R.drawable.uvas, "Uvas", 20,"uvas","FRUTAS"));
-        itemList.add(new Item(R.drawable.naranja, "Naranjas", 3,"naranjas","FRUTAS"));
-        itemList.add(new Item(R.drawable.durazno, "Durazno", 3,"durazno","FRUTAS"));
+        itemList.add(new Item(R.drawable.zanahorias, "Zanahorias", 5,"zanahorias","VERDURAS"));
+        itemList.add(new Item(R.drawable.apio, "Apio", 3,"apio","VERDURAS"));
+        itemList.add(new Item(R.drawable.tomate, "Tomate", 2,"tomate","VERDURAS"));
+        itemList.add(new Item(R.drawable.pepino, "Pepino", 4,"pepino","VERDURAS"));
+        itemList.add(new Item(R.drawable.gisantes, "Guisantes", 2,"guisantes","VERDURAS"));
+        itemList.add(new Item(R.drawable.pimientos, "Pimientos", 6,"pimientos","VERDURAS"));
 
         regresar.setOnClickListener(view -> {
-            Intent retroceder = new Intent(Frutas.this, GestionAlimentos.class);
+            Intent retroceder = new Intent(VerdurasActivity.this, GestionAlimentos.class);
             finish();
         });
 

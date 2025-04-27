@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart;
+package fridgeSmart.fridgesmart.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -13,7 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lacteos extends GestionAlimentos{
+import fridgeSmart.fridgesmart.Item;
+import fridgeSmart.fridgesmart.ItemAdapter;
+import fridgeSmart.fridgesmart.R;
+
+public class LacteosActivity extends GestionAlimentos {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -31,7 +35,7 @@ public class Lacteos extends GestionAlimentos{
         itemList.add(new Item(R.drawable.helado,"Helados",2,"helados","LACTEOS"));
 
         regresar.setOnClickListener(view ->{
-            Intent retroceder = new Intent(Lacteos.this, GestionAlimentos.class);
+            Intent retroceder = new Intent(LacteosActivity.this, GestionAlimentos.class);
             finish();
         });
 

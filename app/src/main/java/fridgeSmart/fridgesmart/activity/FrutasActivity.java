@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart;
+package fridgeSmart.fridgesmart.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -15,24 +15,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Carnes extends GestionAlimentos{
+import fridgeSmart.fridgesmart.Item;
+import fridgeSmart.fridgesmart.ItemAdapter;
+import fridgeSmart.fridgesmart.R;
+
+public class FrutasActivity extends GestionAlimentos {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.carnes);
+        setContentView(R.layout.fruta);
         ImageView regresar = findViewById(R.id.backButton);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         List<Item> itemList = new ArrayList<>();
-        itemList.add(new Item(R.drawable.carne_animada,"Carne",5,"carne","CARNES"));
-        itemList.add(new Item(R.drawable.pollo,"Pollo",3,"pollo","CARNES"));
-        itemList.add(new Item(R.drawable.pescado,"Pescado",2,"pescado","CARNES"));
-        itemList.add(new Item(R.drawable.salchicha,"Embutidos",6,"embutidos","CARNES"));
+        itemList.add(new Item(R.drawable.mandarina, "Mandarinas", 4,"mandarina","FRUTAS"));
+        itemList.add(new Item(R.drawable.platano, "Platanos", 5,"platanos","FRUTAS"));
+        itemList.add(new Item(R.drawable.manzanas, "Manzanas", 0,"manzanas","FRUTAS"));
+        itemList.add(new Item(R.drawable.uvas, "Uvas", 20,"uvas","FRUTAS"));
+        itemList.add(new Item(R.drawable.naranja, "Naranjas", 3,"naranjas","FRUTAS"));
+        itemList.add(new Item(R.drawable.durazno, "Durazno", 3,"durazno","FRUTAS"));
 
-        regresar.setOnClickListener(view ->{
-            Intent retroceder = new Intent(Carnes.this, GestionAlimentos.class);
+        regresar.setOnClickListener(view -> {
+            Intent retroceder = new Intent(FrutasActivity.this, GestionAlimentos.class);
             finish();
         });
 
@@ -42,30 +48,13 @@ public class Carnes extends GestionAlimentos{
                 showCustomDialog(item);
             }
         });
-       recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
     }
 
     private void showCustomDialog(Item item) {
         // Crear el diálogo
         Dialog dialog = new Dialog(this);
-        switch (item.getNombre()){
-            case "carne":
-                dialog.setContentView(R.layout.dialog_custom);
-                break;
-            case "pollo":
-                dialog.setContentView(R.layout.dialog_custom_pollo);
-                break;
-            case "pescado":
-                dialog.setContentView(R.layout.dialog_custom_pescado);
-                break;
-            case "embutidos":
-                dialog.setContentView(R.layout.dialog_custom_embutidos);
-                break;
-            default:
-                dialog.setContentView(R.layout.dialog_custom); // Un layout por defecto
-                break;
-        }
-
+        dialog.setContentView(R.layout.dialog_custom);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(true);
 
@@ -83,6 +72,4 @@ public class Carnes extends GestionAlimentos{
         // Mostrar el diálogo
         dialog.show();
     }
-
-
 }
