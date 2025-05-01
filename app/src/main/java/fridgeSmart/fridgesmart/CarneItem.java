@@ -1,6 +1,8 @@
 package fridgeSmart.fridgesmart;
 
-public class CarneItem {
+import java.io.Serializable;
+
+public class CarneItem implements Serializable {
     public String tipo;
     public String nombre;
     public double kilos;

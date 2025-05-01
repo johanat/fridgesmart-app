@@ -10,10 +10,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import fridgeSmart.fridgesmart.ItemTipoCarne;
+import fridgeSmart.fridgesmart.modelo.ItemTipoCarne;
 import fridgeSmart.fridgesmart.ItemAdapter;
 import fridgeSmart.fridgesmart.R;
 
@@ -23,6 +26,8 @@ public class LacteosActivity extends GestionAlimentos {
 
         setContentView(R.layout.lacteos);
         ImageView regresar = findViewById(R.id.backButton);
+        FloatingActionButton btnBorrar = findViewById(R.id.btnEliminar);
+
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

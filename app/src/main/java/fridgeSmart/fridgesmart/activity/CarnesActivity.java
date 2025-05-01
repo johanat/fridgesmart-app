@@ -2,17 +2,13 @@ package fridgeSmart.fridgesmart.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import fridgeSmart.fridgesmart.ItemAdapter;
-import fridgeSmart.fridgesmart.ItemTipoCarne;
+import fridgeSmart.fridgesmart.modelo.ItemTipoCarne;
 import fridgeSmart.fridgesmart.R;
 
 public class CarnesActivity extends GestionAlimentos {
@@ -21,6 +17,7 @@ public class CarnesActivity extends GestionAlimentos {
 
         setContentView(R.layout.carnes);
         ImageView regresar = findViewById(R.id.backButton);
+
 
         // RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -42,7 +39,6 @@ public class CarnesActivity extends GestionAlimentos {
             public void onItemClick(ItemTipoCarne item) {
                 Intent intent = new Intent(CarnesActivity.this, DetalleActivity.class);
                 startActivity(intent);
-
             }
         });
        recyclerView.setAdapter(adapter);

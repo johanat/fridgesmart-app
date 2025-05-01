@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import fridgeSmart.fridgesmart.ItemTipoCarne;
+import fridgeSmart.fridgesmart.modelo.ItemTipoCarne;
 import fridgeSmart.fridgesmart.ItemAdapter;
 import fridgeSmart.fridgesmart.R;
 

@@ -7,9 +7,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.List;
 
 
@@ -54,6 +52,7 @@ public class TipoCarneAdapter extends RecyclerView.Adapter<TipoCarneAdapter.Carn
         });
 
     }
+
 
     @Override
     public int getItemCount() {

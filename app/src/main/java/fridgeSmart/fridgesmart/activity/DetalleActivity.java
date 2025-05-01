@@ -1,5 +1,6 @@
 package fridgeSmart.fridgesmart.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import fridgeSmart.fridgesmart.CarneItem;
@@ -20,8 +23,8 @@ public class DetalleActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TipoCarneAdapter tipoCarneAdapter;
     private LinearLayout linearLayout;
-    private Button btnAceptar;
     private FloatingActionButton btnEliminar;
+
 
 
     @Override
@@ -38,6 +41,10 @@ public class DetalleActivity extends AppCompatActivity {
 
         // Llenamos la lista de carnes (esto puede venir de cualquier fuente de datos)
         llenarListaDeCarnes();
+
+
+
+
 
         // Creamos el adaptador y lo asignamos al RecyclerView
         tipoCarneAdapter = new TipoCarneAdapter(carneList, btnEliminar, () -> {
@@ -69,6 +76,7 @@ public class DetalleActivity extends AppCompatActivity {
         carneList.add(new CarneItem("Pollo", "Pechuga de pollo", 1.5));
         carneList.add(new CarneItem("Pollo", "Calamar", 1.5));
         carneList.add(new CarneItem("Pescado", "Meluza", 2.5));
+        carneList.add(new CarneItem("Pescado", "Salmón", 3.0));
     }
 
     // Método para manejar el botón de aceptar
@@ -88,7 +96,6 @@ public class DetalleActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("No", null)
                 .show();
-
     }
 }
 

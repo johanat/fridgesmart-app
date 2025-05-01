@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import fridgeSmart.fridgesmart.modelo.ItemTipoCarne;
+
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     private List<ItemTipoCarne> itemTipoCarneList;
     private OnItemClickListener listener;//Interfaz para manejar clicks

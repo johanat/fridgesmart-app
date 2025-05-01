@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart;
+package fridgeSmart.fridgesmart.modelo;
 
 public class ItemTipoCarne {
     private int imageResId;

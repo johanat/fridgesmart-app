@@ -70,6 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:backgroundTint="#a7f197"
+            android:visibility="gone"
             android:src="@drawable/ic_borrar"
             app:layout_constraintBottom_toTopOf="@id/btnModificar"
             app:layout_constraintEnd_toEndOf="parent" />
