@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PortadaPrincipal">
+    tools:context=".activity.PortadaPrincipalActivity">
 
     <!-- Contenedor principal -->
     <LinearLayout
@@ -25,10 +25,9 @@
 
             <ImageView
                 android:id="@+id/btnMenu"
-                android:layout_width="24dp"
-                android:layout_height="28dp"
-
-                android:layout_marginStart="16dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="8dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_menu"
                 app:tint="@color/white" />
@@ -46,7 +45,7 @@
                 android:layout_height="match_parent"
                 android:background="#99F8F8F8"
                 android:orientation="vertical"
-                tools:context=".PortadaPrincipal">
+                tools:context=".activity.PortadaPrincipalActivity">
 
                 <TextView
                     android:id="@+id/textView"

@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart;
+package fridgeSmart.fridgesmart.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -15,39 +15,43 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Frutas extends GestionAlimentos{
+import fridgeSmart.fridgesmart.modelo.ItemTipoCarne;
+import fridgeSmart.fridgesmart.ItemAdapter;
+import fridgeSmart.fridgesmart.R;
+
+public class VerdurasActivity extends GestionAlimentos {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.fruta);
+        setContentView(R.layout.verduras);
         ImageView regresar = findViewById(R.id.backButton);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<Item> itemList = new ArrayList<>();
-        itemList.add(new Item(R.drawable.mandarina, "Mandarinas", 4,"mandarina","FRUTAS"));
-        itemList.add(new Item(R.drawable.platano, "Platanos", 5,"platanos","FRUTAS"));
-        itemList.add(new Item(R.drawable.manzanas, "Manzanas", 0,"manzanas","FRUTAS"));
-        itemList.add(new Item(R.drawable.uvas, "Uvas", 20,"uvas","FRUTAS"));
-        itemList.add(new Item(R.drawable.naranja, "Naranjas", 3,"naranjas","FRUTAS"));
-        itemList.add(new Item(R.drawable.durazno, "Durazno", 3,"durazno","FRUTAS"));
+        List<ItemTipoCarne> itemTipoCarneList = new ArrayList<>();
+        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.zanahorias, "Zanahorias", 5,"zanahorias","VERDURAS"));
+        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.apio, "Apio", 3,"apio","VERDURAS"));
+        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.tomate, "Tomate", 2,"tomate","VERDURAS"));
+        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.pepino, "Pepino", 4,"pepino","VERDURAS"));
+        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.gisantes, "Guisantes", 2,"guisantes","VERDURAS"));
+        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.pimientos, "Pimientos", 6,"pimientos","VERDURAS"));
 
         regresar.setOnClickListener(view -> {
-            Intent retroceder = new Intent(Frutas.this, GestionAlimentos.class);
+            Intent retroceder = new Intent(VerdurasActivity.this, GestionAlimentos.class);
             finish();
         });
 
-        ItemAdapter adapter = new ItemAdapter(itemList, new ItemAdapter.OnItemClickListener(){
+        ItemAdapter adapter = new ItemAdapter(itemTipoCarneList, new ItemAdapter.OnItemClickListener(){
             @Override
-            public void onItemClick(Item item){
+            public void onItemClick(ItemTipoCarne item){
                 showCustomDialog(item);
             }
         });
         recyclerView.setAdapter(adapter);
     }
 
-    private void showCustomDialog(Item item) {
+    private void showCustomDialog(ItemTipoCarne itemTipoCarne) {
         // Crear el diálogo
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_custom);

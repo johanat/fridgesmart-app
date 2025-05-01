@@ -1,13 +1,13 @@
-package fridgeSmart.fridgesmart;
+package fridgeSmart.fridgesmart.modelo;
 
-public class Item {
+public class ItemTipoCarne {
     private int imageResId;
     private String title;
     private int number;
     private String nombre;
     private String category;
 
-    public Item(int imageResId, String title, int number, String nombre, String category) {
+    public ItemTipoCarne(int imageResId, String title, int number, String nombre, String category) {
         this.imageResId = imageResId;
         this.title = title;
         this.number = number;
@@ -20,4 +20,6 @@ public class Item {
     public int getNumber() { return number; }
     public String getNombre(){return nombre;}
     public String getCategory(){return category;}
+
+
 }

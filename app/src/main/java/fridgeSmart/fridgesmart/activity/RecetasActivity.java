@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart;
+package fridgeSmart.fridgesmart.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,9 +7,8 @@ import android.widget.ImageView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import fridgeSmart.fridgesmart.R;
 
 public class RecetasActivity extends AppCompatActivity {
 
@@ -27,27 +26,27 @@ public class RecetasActivity extends AppCompatActivity {
         ImageView flechaRetroceder = findViewById(R.id.backButton);
 
         flechaRetroceder.setOnClickListener(view ->{
-            Intent retroceder = new Intent(RecetasActivity.this, PortadaPrincipal.class);
+            Intent retroceder = new Intent(RecetasActivity.this, PortadaPrincipalActivity.class);
             finish();
         });
 
         salmon.setOnClickListener(view -> {
-            Intent receta = new Intent(RecetasActivity.this, RecetaSalmon.class);
+            Intent receta = new Intent(RecetasActivity.this, RecetaSalmonActivity.class);
             startActivity(receta);
         });
 
         tortitas.setOnClickListener(view -> {
-            Intent receta = new Intent(RecetasActivity.this, RecetaTortitas.class);
+            Intent receta = new Intent(RecetasActivity.this, RecetaTortitasActivity.class);
             startActivity(receta);
         });
 
         pasta.setOnClickListener(view -> {
-            Intent receta = new Intent(RecetasActivity.this, RecetaPasta.class);
+            Intent receta = new Intent(RecetasActivity.this, RecetaPastaActivity.class);
             startActivity(receta);
         });
 
         sopa.setOnClickListener(view -> {
-            Intent receta = new Intent(RecetasActivity.this, RecetaSopa.class);
+            Intent receta = new Intent(RecetasActivity.this, RecetaSopaActivity.class);
             startActivity(receta);
         });
 

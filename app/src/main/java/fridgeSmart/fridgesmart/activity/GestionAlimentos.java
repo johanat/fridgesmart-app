@@ -1,13 +1,13 @@
-package fridgeSmart.fridgesmart;
+package fridgeSmart.fridgesmart.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import fridgeSmart.fridgesmart.R;
 
-public class GestionAlimentos extends PortadaPrincipal{
+public class GestionAlimentos extends PortadaPrincipalActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gestion_alimentos);
@@ -17,29 +17,27 @@ public class GestionAlimentos extends PortadaPrincipal{
         ImageView flechaRetroceder = findViewById(R.id.backButton);
         LinearLayout iconoFrutas = findViewById(R.id.iconoFrutas);
         LinearLayout iconoVerduras = findViewById(R.id.iconoVerduras);
-        FloatingActionButton iconAgregar = findViewById(R.id.btnAgregar);
-        FloatingActionButton iconoEliminar = findViewById(R.id.btnEliminar);
-        FloatingActionButton iconoModificar = findViewById(R.id.btnModificar);
+
 
         flechaRetroceder.setOnClickListener(view ->{
-            Intent retroceder = new Intent(GestionAlimentos.this, PortadaPrincipal.class);
+            Intent retroceder = new Intent(GestionAlimentos.this, PortadaPrincipalActivity.class);
             finish();
         });
         iconoCarne.setOnClickListener(view -> {
-            Intent intent = new Intent(GestionAlimentos.this, Carnes.class);
+            Intent intent = new Intent(GestionAlimentos.this, CarnesActivity.class);
             startActivity(intent);
         });
         iconoLeche.setOnClickListener(view ->{
-            Intent intent = new Intent(GestionAlimentos.this, Lacteos.class);
+            Intent intent = new Intent(GestionAlimentos.this, LacteosActivity.class);
             startActivity(intent);
         });
         iconoFrutas.setOnClickListener( view ->{
-            Intent intent = new Intent(GestionAlimentos.this, Frutas.class);
+            Intent intent = new Intent(GestionAlimentos.this, FrutasActivity.class);
             startActivity(intent);
         });
 
         iconoVerduras.setOnClickListener(view ->{
-            Intent intent = new Intent(GestionAlimentos.this, Verduras.class);
+            Intent intent = new Intent(GestionAlimentos.this, VerdurasActivity.class);
             startActivity(intent);
         });
     }

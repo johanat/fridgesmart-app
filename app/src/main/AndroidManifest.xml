@@ -13,22 +13,25 @@
         android:theme="@style/Theme.FridgeSmart"
         tools:targetApi="31">
         <activity
-            android:name=".RecetaSopa"
+            android:name=".activity.DetalleActivity"
             android:exported="false" />
         <activity
-            android:name=".RecetaPasta"
+            android:name=".activity.RecetaSopaActivity"
             android:exported="false" />
         <activity
-            android:name=".RecetaTortitas"
+            android:name=".activity.RecetaPastaActivity"
             android:exported="false" />
         <activity
-            android:name=".RecetaSalmon"
+            android:name=".activity.RecetaTortitasActivity"
             android:exported="false" />
         <activity
-            android:name=".RecetasActivity"
+            android:name=".activity.RecetaSalmonActivity"
             android:exported="false" />
         <activity
-            android:name=".PortadaPrincipal"
+            android:name=".activity.RecetasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PortadaPrincipalActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,12 +39,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GestionAlimentos"/>
-        <activity android:name=".Carnes"/>
-        <activity android:name=".Lacteos"/>
-        <activity android:name=".Frutas"/>
-        <activity android:name=".Verduras"/>
-        <activity android:name=".ControlTemperaturas"/>
+        <activity android:name=".activity.GestionAlimentos" />
+        <activity android:name=".activity.CarnesActivity" />
+        <activity android:name=".activity.LacteosActivity" />
+        <activity android:name=".activity.FrutasActivity" />
+        <activity android:name=".activity.VerdurasActivity" />
+        <activity android:name=".activity.ControlTemperaturasActivity" />
     </application>
 
 </manifest>
