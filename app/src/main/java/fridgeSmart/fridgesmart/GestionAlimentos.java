@@ -17,9 +17,6 @@ public class GestionAlimentos extends PortadaPrincipal{
         ImageView flechaRetroceder = findViewById(R.id.backButton);
         LinearLayout iconoFrutas = findViewById(R.id.iconoFrutas);
         LinearLayout iconoVerduras = findViewById(R.id.iconoVerduras);
-        FloatingActionButton iconAgregar = findViewById(R.id.btnAgregar);
-        FloatingActionButton iconoEliminar = findViewById(R.id.btnEliminar);
-        FloatingActionButton iconoModificar = findViewById(R.id.btnModificar);
 
         flechaRetroceder.setOnClickListener(view ->{
             Intent retroceder = new Intent(GestionAlimentos.this, PortadaPrincipal.class);
