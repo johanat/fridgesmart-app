@@ -47,31 +47,9 @@ public class LacteosActivity extends GestionAlimentos {
         ItemAdapter adapter = new ItemAdapter(itemTipoCarneList, new ItemAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(ItemTipoCarne item){
-                showCustomDialog(item);
+
             }
         });
         recyclerView.setAdapter(adapter);
-    }
-
-    private void showCustomDialog(ItemTipoCarne itemTipoCarne) {
-        // Crear el diálogo
-        Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_custom);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setCancelable(true);
-
-        // Oscurecer el fondo
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.dimAmount = 0.5f; // Ajusta la opacidad del fondo oscuro
-        dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        dialog.getWindow().setAttributes(lp);
-
-        // Botón para cerrar el diálogo
-        ImageButton btnClose = dialog.findViewById(R.id.btnClose);
-        btnClose.setOnClickListener(v -> dialog.dismiss());
-
-        // Mostrar el diálogo
-        dialog.show();
     }
 }
