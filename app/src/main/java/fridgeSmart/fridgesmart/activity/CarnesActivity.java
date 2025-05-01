@@ -7,13 +7,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
-import fridgeSmart.fridgesmart.ItemAdapter;
-import fridgeSmart.fridgesmart.modelo.ItemTipoCarne;
+
+import fridgeSmart.fridgesmart.modelo.Carne;
+import fridgeSmart.fridgesmart.TipoCarneAdapter;
+import fridgeSmart.fridgesmart.modelo.TipoCarne;
 import fridgeSmart.fridgesmart.R;
 
 public class CarnesActivity extends GestionAlimentos {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        List<Carne> listaFiltrado = (List<Carne>) getIntent().getSerializableExtra("listaCarne");
 
         setContentView(R.layout.carnes);
         ImageView regresar = findViewById(R.id.backButton);
@@ -23,21 +26,25 @@ public class CarnesActivity extends GestionAlimentos {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<ItemTipoCarne> itemTipoCarneCategoriaCarnes = new ArrayList<>();
-        itemTipoCarneCategoriaCarnes.add(new ItemTipoCarne(R.drawable.carne_animada, "Carne", 5, "carne", "CARNES"));
-        itemTipoCarneCategoriaCarnes.add(new ItemTipoCarne(R.drawable.pollo, "Pollo", 3, "pollo", "CARNES"));
-        itemTipoCarneCategoriaCarnes.add(new ItemTipoCarne(R.drawable.pescado, "Pescado", 2, "pescado", "CARNES"));
-        itemTipoCarneCategoriaCarnes.add(new ItemTipoCarne(R.drawable.salchicha, "Embutidos", 6, "embutidos", "CARNES"));
+        //Recibe la lista de carne desde la otra activity
+        List<Carne> listaRecibida = (List<Carne>) getIntent().getSerializableExtra("listaCarne");
+
+
+        List<TipoCarne> tipoCarneCategoriaCarnes = new ArrayList<>();
+        tipoCarneCategoriaCarnes.add(new TipoCarne(R.drawable.carne_animada,  5, "carne", "CARNES"));
+        tipoCarneCategoriaCarnes.add(new TipoCarne(R.drawable.pollo,  3, "pollo", "POLLO"));
+        tipoCarneCategoriaCarnes.add(new TipoCarne(R.drawable.pescado, 2, "pescado", "PESCADO"));
+        tipoCarneCategoriaCarnes.add(new TipoCarne(R.drawable.salchicha,  6, "embutidos", "EMBUTIDOS"));
 
         regresar.setOnClickListener(view ->{
-            Intent retroceder = new Intent(CarnesActivity.this, GestionAlimentos.class);
             finish();
         });
 
-        ItemAdapter adapter = new ItemAdapter(itemTipoCarneCategoriaCarnes, new ItemAdapter.OnItemClickListener() {
+        TipoCarneAdapter adapter = new TipoCarneAdapter(tipoCarneCategoriaCarnes, new TipoCarneAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(ItemTipoCarne item) {
+            public void onItemClick(TipoCarne tipoCarne) {
                 Intent intent = new Intent(CarnesActivity.this, DetalleActivity.class);
+                intent.putExtra("tipoCarne", tipoCarne.getTipo());
                 startActivity(intent);
             }
         });

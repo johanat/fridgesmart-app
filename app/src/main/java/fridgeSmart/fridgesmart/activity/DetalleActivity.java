@@ -2,26 +2,29 @@ package fridgeSmart.fridgesmart.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.util.Log;
 import android.widget.LinearLayout;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import fridgeSmart.fridgesmart.CarneItem;
+
+import fridgeSmart.fridgesmart.modelo.Carne;
 import fridgeSmart.fridgesmart.R;
-import fridgeSmart.fridgesmart.TipoCarneAdapter;
+import fridgeSmart.fridgesmart.DetalleTipoCarneAdapter;
 
 public class DetalleActivity extends AppCompatActivity {
-    private List<CarneItem> carneList = new ArrayList<>();
+    private List<Carne> carneList = new ArrayList<>();
+    private List<Carne> listaSelecccionados = new ArrayList<>();
     private RecyclerView recyclerView;
-    private TipoCarneAdapter tipoCarneAdapter;
+    private DetalleTipoCarneAdapter detalleTipoCarneAdapter;
     private LinearLayout linearLayout;
     private FloatingActionButton btnEliminar;
 
@@ -41,15 +44,15 @@ public class DetalleActivity extends AppCompatActivity {
 
         // Llenamos la lista de carnes (esto puede venir de cualquier fuente de datos)
         llenarListaDeCarnes();
-
-
-
+        Intent intent = getIntent();
+        String tipoCarne = intent.getStringExtra("tipoCarne");
+        Log.d("DetalleActivity", "Tipo de carne recibido: " + tipoCarne);
 
 
         // Creamos el adaptador y lo asignamos al RecyclerView
-        tipoCarneAdapter = new TipoCarneAdapter(carneList, btnEliminar, () -> {
+        detalleTipoCarneAdapter = new DetalleTipoCarneAdapter(carneList, btnEliminar, () -> {
             boolean algunoSeleccionado = false;
-            for (CarneItem carne : carneList) {
+            for (Carne carne : carneList) {
                 if (carne.isSelecionado()) {
                     algunoSeleccionado = true;
                     break;
@@ -59,7 +62,7 @@ public class DetalleActivity extends AppCompatActivity {
         btnEliminar.setOnClickListener(v -> {
             onBtnEliminarClick();
         });
-        recyclerView.setAdapter(tipoCarneAdapter);
+        recyclerView.setAdapter(detalleTipoCarneAdapter);
 
 
     }
@@ -68,15 +71,16 @@ public class DetalleActivity extends AppCompatActivity {
     private void llenarListaDeCarnes() {
         // como creo una lista de carne la misma que sera usada en el adapter y en el holder
 
-        carneList.add(new CarneItem("Carne", "Chuleta de Cerdo", 2.5));
-        carneList.add(new CarneItem("Carne", "Filete de Ternera", 3.0));
-        carneList.add(new CarneItem("Carne", "Lomo de Cerdo", 1.0));
-        carneList.add(new CarneItem("Carne", "Higado de ternera", 1.5));
-        carneList.add(new CarneItem("Pollo", "Muslos de pollo", 2.0));
-        carneList.add(new CarneItem("Pollo", "Pechuga de pollo", 1.5));
-        carneList.add(new CarneItem("Pollo", "Calamar", 1.5));
-        carneList.add(new CarneItem("Pescado", "Meluza", 2.5));
-        carneList.add(new CarneItem("Pescado", "Salmón", 3.0));
+        carneList.add(new Carne("Carne", "Chuleta de Cerdo", 2.5));
+        carneList.add(new Carne("Carne", "Filete de Ternera", 3.0));
+        carneList.add(new Carne("Carne", "Lomo de Cerdo", 1.0));
+        carneList.add(new Carne("Carne", "Higado de ternera", 1.5));
+        carneList.add(new Carne("Pollo", "Muslos de pollo", 2.0));
+        carneList.add(new Carne("Pollo", "Pechuga de pollo", 1.5));
+        carneList.add(new Carne("Pollo", "Calamar", 1.5));
+        carneList.add(new Carne("Pescado", "Meluza", 2.5));
+        carneList.add(new Carne("Pescado", "Salmón", 3.0));
+
     }
 
     // Método para manejar el botón de aceptar
@@ -92,11 +96,12 @@ public class DetalleActivity extends AppCompatActivity {
                             carneList.remove(i);
                         }
                     }
-                    tipoCarneAdapter.notifyDataSetChanged();
+                    detalleTipoCarneAdapter.notifyDataSetChanged();
                 })
                 .setNegativeButton("No", null)
                 .show();
     }
+
 }
 
 

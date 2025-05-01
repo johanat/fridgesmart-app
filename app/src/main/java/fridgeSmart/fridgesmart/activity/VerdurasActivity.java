@@ -1,12 +1,7 @@
 package fridgeSmart.fridgesmart.activity;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.WindowManager;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import fridgeSmart.fridgesmart.modelo.ItemTipoCarne;
-import fridgeSmart.fridgesmart.ItemAdapter;
+import fridgeSmart.fridgesmart.modelo.TipoCarne;
+import fridgeSmart.fridgesmart.TipoCarneAdapter;
 import fridgeSmart.fridgesmart.R;
 
 public class VerdurasActivity extends GestionAlimentos {
@@ -29,22 +24,22 @@ public class VerdurasActivity extends GestionAlimentos {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<ItemTipoCarne> itemTipoCarneList = new ArrayList<>();
-        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.zanahorias, "Zanahorias", 5,"zanahorias","VERDURAS"));
-        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.apio, "Apio", 3,"apio","VERDURAS"));
-        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.tomate, "Tomate", 2,"tomate","VERDURAS"));
-        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.pepino, "Pepino", 4,"pepino","VERDURAS"));
-        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.gisantes, "Guisantes", 2,"guisantes","VERDURAS"));
-        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.pimientos, "Pimientos", 6,"pimientos","VERDURAS"));
+        List<TipoCarne> tipoCarneList = new ArrayList<>();
+        tipoCarneList.add(new TipoCarne(R.drawable.zanahorias,  5,"zanahorias","VERDURAS"));
+        tipoCarneList.add(new TipoCarne(R.drawable.apio,  3,"apio","VERDURAS"));
+        tipoCarneList.add(new TipoCarne(R.drawable.tomate,  2,"tomate","VERDURAS"));
+        tipoCarneList.add(new TipoCarne(R.drawable.pepino,  4,"pepino","VERDURAS"));
+        tipoCarneList.add(new TipoCarne(R.drawable.gisantes,  2,"guisantes","VERDURAS"));
+        tipoCarneList.add(new TipoCarne(R.drawable.pimientos, 6,"pimientos","VERDURAS"));
 
         regresar.setOnClickListener(view -> {
             Intent retroceder = new Intent(VerdurasActivity.this, GestionAlimentos.class);
             finish();
         });
 
-        ItemAdapter adapter = new ItemAdapter(itemTipoCarneList, new ItemAdapter.OnItemClickListener(){
+        TipoCarneAdapter adapter = new TipoCarneAdapter(tipoCarneList, new TipoCarneAdapter.OnItemClickListener(){
             @Override
-            public void onItemClick(ItemTipoCarne item){
+            public void onItemClick(TipoCarne item){
 
             }
         });
