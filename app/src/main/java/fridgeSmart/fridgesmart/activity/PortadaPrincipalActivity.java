@@ -21,7 +21,7 @@ public class PortadaPrincipalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_portada_principal);
 
         LinearLayout iconoGestionAlimentos = findViewById(R.id.iconGestionAliementos);
         LinearLayout iconoControlTemperatura = findViewById(R.id.icono_temperatura);

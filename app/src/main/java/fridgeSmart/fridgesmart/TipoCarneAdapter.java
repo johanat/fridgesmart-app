@@ -7,16 +7,21 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
 
-public class CarneAdapter extends RecyclerView.Adapter<CarneAdapter.CarneViewHolder> {
+public class TipoCarneAdapter extends RecyclerView.Adapter<TipoCarneAdapter.CarneViewHolder> {
     private List<CarneItem> carneList;
     public EnCambioSeleccionCarneEscuchador listener;
+    public FloatingActionButton btnFlotanteEliminar;
 
-    public CarneAdapter(List<CarneItem> carneList, EnCambioSeleccionCarneEscuchador listener) {
+    public TipoCarneAdapter(List<CarneItem> carneList, FloatingActionButton btnFlotanteEliminar, EnCambioSeleccionCarneEscuchador listener) {
         this.carneList = carneList;
         this.listener = listener;
+        this.btnFlotanteEliminar = btnFlotanteEliminar;
     }
 
     @NonNull
@@ -43,6 +48,7 @@ public class CarneAdapter extends RecyclerView.Adapter<CarneAdapter.CarneViewHol
             carne.setSelecionado(isChecked);
             if (listener != null) {
                 listener.onCambioSeleccionCarne();
+                btnFlotanteEliminar.setVisibility(isChecked ? View.VISIBLE : View.GONE);
             }
 
         });

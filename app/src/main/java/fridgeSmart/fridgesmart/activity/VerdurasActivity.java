@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import fridgeSmart.fridgesmart.Item;
+import fridgeSmart.fridgesmart.ItemTipoCarne;
 import fridgeSmart.fridgesmart.ItemAdapter;
 import fridgeSmart.fridgesmart.R;
 
@@ -29,29 +29,29 @@ public class VerdurasActivity extends GestionAlimentos {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<Item> itemList = new ArrayList<>();
-        itemList.add(new Item(R.drawable.zanahorias, "Zanahorias", 5,"zanahorias","VERDURAS"));
-        itemList.add(new Item(R.drawable.apio, "Apio", 3,"apio","VERDURAS"));
-        itemList.add(new Item(R.drawable.tomate, "Tomate", 2,"tomate","VERDURAS"));
-        itemList.add(new Item(R.drawable.pepino, "Pepino", 4,"pepino","VERDURAS"));
-        itemList.add(new Item(R.drawable.gisantes, "Guisantes", 2,"guisantes","VERDURAS"));
-        itemList.add(new Item(R.drawable.pimientos, "Pimientos", 6,"pimientos","VERDURAS"));
+        List<ItemTipoCarne> itemTipoCarneList = new ArrayList<>();
+        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.zanahorias, "Zanahorias", 5,"zanahorias","VERDURAS"));
+        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.apio, "Apio", 3,"apio","VERDURAS"));
+        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.tomate, "Tomate", 2,"tomate","VERDURAS"));
+        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.pepino, "Pepino", 4,"pepino","VERDURAS"));
+        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.gisantes, "Guisantes", 2,"guisantes","VERDURAS"));
+        itemTipoCarneList.add(new ItemTipoCarne(R.drawable.pimientos, "Pimientos", 6,"pimientos","VERDURAS"));
 
         regresar.setOnClickListener(view -> {
             Intent retroceder = new Intent(VerdurasActivity.this, GestionAlimentos.class);
             finish();
         });
 
-        ItemAdapter adapter = new ItemAdapter(itemList, new ItemAdapter.OnItemClickListener(){
+        ItemAdapter adapter = new ItemAdapter(itemTipoCarneList, new ItemAdapter.OnItemClickListener(){
             @Override
-            public void onItemClick(Item item){
+            public void onItemClick(ItemTipoCarne item){
                 showCustomDialog(item);
             }
         });
         recyclerView.setAdapter(adapter);
     }
 
-    private void showCustomDialog(Item item) {
+    private void showCustomDialog(ItemTipoCarne itemTipoCarne) {
         // Crear el diálogo
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_custom);

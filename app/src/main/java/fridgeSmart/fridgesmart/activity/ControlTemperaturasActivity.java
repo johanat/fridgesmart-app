@@ -12,7 +12,7 @@ public class ControlTemperaturasActivity extends PortadaPrincipalActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.control_temperatura);
+        setContentView(R.layout.activity_control_temperatura);
 
         ImageView flechaRetroceder = findViewById(R.id.backButton);
 
