@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart.activity;
+package fridgeSmart.fridgesmart.pantallas.recetasdetalle;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import fridgeSmart.fridgesmart.R;
+import fridgeSmart.fridgesmart.pantallas.recetas.RecetasActivity;
 
 public class RecetaSalmonActivity extends AppCompatActivity {
 

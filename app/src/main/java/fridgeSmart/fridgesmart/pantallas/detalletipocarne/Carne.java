@@ -1,14 +1,14 @@
-package fridgeSmart.fridgesmart;
+package fridgeSmart.fridgesmart.pantallas.detalletipocarne;
 
 import java.io.Serializable;
 
-public class CarneItem implements Serializable {
+public class Carne implements Serializable {
     public String tipo;
     public String nombre;
     public double kilos;
     public boolean selecionado;
 
-    public CarneItem(String tipo, String nombre, double kilos) {
+    public Carne(String tipo, String nombre, double kilos) {
         this.tipo = tipo;
         this.nombre = nombre;
         this.kilos = kilos;

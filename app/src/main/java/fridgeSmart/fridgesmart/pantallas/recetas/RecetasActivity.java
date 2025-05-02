@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart.activity;
+package fridgeSmart.fridgesmart.pantallas.recetas;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import fridgeSmart.fridgesmart.R;
+import fridgeSmart.fridgesmart.pantallas.principal.PrincipalActivity;
+import fridgeSmart.fridgesmart.pantallas.recetasdetalle.RecetaPastaActivity;
+import fridgeSmart.fridgesmart.pantallas.recetasdetalle.RecetaSalmonActivity;
+import fridgeSmart.fridgesmart.pantallas.recetasdetalle.RecetaSopaActivity;
+import fridgeSmart.fridgesmart.pantallas.recetasdetalle.RecetaTortitasActivity;
 
 public class RecetasActivity extends AppCompatActivity {
 
@@ -26,7 +31,7 @@ public class RecetasActivity extends AppCompatActivity {
         ImageView flechaRetroceder = findViewById(R.id.backButton);
 
         flechaRetroceder.setOnClickListener(view ->{
-            Intent retroceder = new Intent(RecetasActivity.this, PortadaPrincipalActivity.class);
+            Intent retroceder = new Intent(RecetasActivity.this, PrincipalActivity.class);
             finish();
         });
 

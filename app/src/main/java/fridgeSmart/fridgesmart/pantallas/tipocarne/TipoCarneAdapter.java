@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart;
+package fridgeSmart.fridgesmart.pantallas.tipocarne;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import fridgeSmart.fridgesmart.modelo.ItemTipoCarne;
+import fridgeSmart.fridgesmart.R;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
-    private List<ItemTipoCarne> itemTipoCarneList;
+public class TipoCarneAdapter extends RecyclerView.Adapter<TipoCarneAdapter.ViewHolder> {
+    private List<TipoCarne> tipoCarneList;
     private OnItemClickListener listener;//Interfaz para manejar clicks
 
-    public ItemAdapter(List<ItemTipoCarne> itemTipoCarneList, OnItemClickListener listener) {
-        this.itemTipoCarneList = itemTipoCarneList;
+    public TipoCarneAdapter(List<TipoCarne> tipoCarneList, OnItemClickListener listener) {
+        this.tipoCarneList = tipoCarneList;
         this.listener = listener;
     }
 
@@ -33,31 +33,23 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ItemTipoCarne itemTipoCarne = itemTipoCarneList.get(position);
-        holder.imageView.setImageResource(itemTipoCarne.getImageResId());
-        holder.textViewTitle.setText(itemTipoCarne.getTitle());
-        holder.textViewNumber.setText(String.valueOf(itemTipoCarne.getNumber()));
+        TipoCarne tipoCarne = tipoCarneList.get(position);
+        holder.imageView.setImageResource(tipoCarne.getImageId());
+        holder.textViewTitle.setText(tipoCarne.getNombre());
+        holder.textViewNumber.setText(String.valueOf(tipoCarne.getCantidad()));
 
         // Verificar si el item pertenece a la categoría de "Carnes"
-        if("CARNES".equalsIgnoreCase(itemTipoCarne.getCategory())){
-            holder.arrowButton.setVisibility(View.VISIBLE);
-            holder.itemView.setOnClickListener(v -> listener.onItemClick(itemTipoCarne));
-        }else{
-            holder.arrowButton.setVisibility(View.GONE);
-        }
-
-
-
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(tipoCarne));
     }
 
     @Override
     public int getItemCount() {
-        return itemTipoCarneList.size();
+        return tipoCarneList.size();
     }
 
     //Interfaz para manejar los clicks en la flecha
     public interface OnItemClickListener{
-        void onItemClick(ItemTipoCarne itemTipoCarne);
+        void onItemClick(TipoCarne tipoCarne);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

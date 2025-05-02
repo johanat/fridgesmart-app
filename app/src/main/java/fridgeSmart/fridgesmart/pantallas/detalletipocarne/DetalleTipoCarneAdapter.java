@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart;
+package fridgeSmart.fridgesmart.pantallas.detalletipocarne;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
+import fridgeSmart.fridgesmart.R;
 
-public class TipoCarneAdapter extends RecyclerView.Adapter<TipoCarneAdapter.CarneViewHolder> {
-    private List<CarneItem> carneList;
+
+public class DetalleTipoCarneAdapter extends RecyclerView.Adapter<DetalleTipoCarneAdapter.CarneViewHolder> {
+    private List<Carne> carneList;
     public EnCambioSeleccionCarneEscuchador listener;
     public FloatingActionButton btnFlotanteEliminar;
 
-    public TipoCarneAdapter(List<CarneItem> carneList, FloatingActionButton btnFlotanteEliminar, EnCambioSeleccionCarneEscuchador listener) {
+    public DetalleTipoCarneAdapter(List<Carne> carneList, FloatingActionButton btnFlotanteEliminar, EnCambioSeleccionCarneEscuchador listener) {
         this.carneList = carneList;
         this.listener = listener;
         this.btnFlotanteEliminar = btnFlotanteEliminar;
@@ -25,13 +27,13 @@ public class TipoCarneAdapter extends RecyclerView.Adapter<TipoCarneAdapter.Carn
     @NonNull
     @Override
     public CarneViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detalle, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detalle_tipo_carne, parent, false);
         return new CarneViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CarneViewHolder holder, int position) {
-        CarneItem carne = carneList.get(position);
+        Carne carne = carneList.get(position);
         holder.nombre.setText(carne.getNombre());
         holder.kilos.setText(carne.getKilos() + " kg");
 
