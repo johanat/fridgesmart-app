@@ -48,9 +48,10 @@ public class DetalleActivity extends AppCompatActivity {
         String tipoCarne = intent.getStringExtra("tipoCarne");
         Log.d("DetalleActivity", "Tipo de carne recibido: " + tipoCarne);
 
+        List<Carne> listaFiltrada = getListaDeTipo(tipoCarne);
 
         // Creamos el adaptador y lo asignamos al RecyclerView
-        detalleTipoCarneAdapter = new DetalleTipoCarneAdapter(carneList, btnEliminar, () -> {
+        detalleTipoCarneAdapter = new DetalleTipoCarneAdapter(listaFiltrada, btnEliminar, () -> {
             boolean algunoSeleccionado = false;
             for (Carne carne : carneList) {
                 if (carne.isSelecionado()) {
@@ -80,7 +81,16 @@ public class DetalleActivity extends AppCompatActivity {
         carneList.add(new Carne("Pollo", "Calamar", 1.5));
         carneList.add(new Carne("Pescado", "Meluza", 2.5));
         carneList.add(new Carne("Pescado", "Salmón", 3.0));
+    }
 
+    private List<Carne> getListaDeTipo(String tipo) {
+        List<Carne> listaFiltrada = new ArrayList<>();
+        for (Carne carne : carneList) {
+            if (carne.getTipo().equalsIgnoreCase(tipo)) {
+                listaFiltrada.add(carne);
+            }
+        }
+        return listaFiltrada;
     }
 
     // Método para manejar el botón de aceptar
