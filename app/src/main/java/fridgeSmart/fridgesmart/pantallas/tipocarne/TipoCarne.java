@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart.modelo;
+package fridgeSmart.fridgesmart.pantallas.tipocarne;
 
 public class TipoCarne {
     private int imageId;

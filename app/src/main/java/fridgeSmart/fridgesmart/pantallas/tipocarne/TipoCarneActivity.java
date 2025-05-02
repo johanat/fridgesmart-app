@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart.activity;
+package fridgeSmart.fridgesmart.pantallas.tipocarne;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,17 +8,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import fridgeSmart.fridgesmart.modelo.Carne;
-import fridgeSmart.fridgesmart.TipoCarneAdapter;
-import fridgeSmart.fridgesmart.modelo.TipoCarne;
+import fridgeSmart.fridgesmart.pantallas.detalletipocarne.Carne;
 import fridgeSmart.fridgesmart.R;
+import fridgeSmart.fridgesmart.pantallas.detalletipocarne.DetalleTipoCarneActivity;
+import fridgeSmart.fridgesmart.pantallas.gestionalimentos.GestionAlimentosActivity;
 
-public class CarnesActivity extends GestionAlimentos {
+public class TipoCarneActivity extends GestionAlimentosActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         List<Carne> listaFiltrado = (List<Carne>) getIntent().getSerializableExtra("listaCarne");
 
-        setContentView(R.layout.carnes);
+        setContentView(R.layout.activity_tipo_carne);
         ImageView regresar = findViewById(R.id.backButton);
 
 
@@ -43,7 +43,7 @@ public class CarnesActivity extends GestionAlimentos {
         TipoCarneAdapter adapter = new TipoCarneAdapter(tipoCarneCategoriaCarnes, new TipoCarneAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(TipoCarne tipoCarne) {
-                Intent intent = new Intent(CarnesActivity.this, DetalleActivity.class);
+                Intent intent = new Intent(TipoCarneActivity.this, DetalleTipoCarneActivity.class);
                 intent.putExtra("tipoCarne", tipoCarne.getTipo());
                 startActivity(intent);
             }

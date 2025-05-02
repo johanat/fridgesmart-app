@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart.activity;
+package fridgeSmart.fridgesmart.pantallas.principal;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,8 +12,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 import fridgeSmart.fridgesmart.R;
+import fridgeSmart.fridgesmart.pantallas.recetas.RecetasActivity;
+import fridgeSmart.fridgesmart.pantallas.controltemperatura.ControlTemperaturasActivity;
+import fridgeSmart.fridgesmart.pantallas.gestionalimentos.GestionAlimentosActivity;
 
-public class PortadaPrincipalActivity extends AppCompatActivity {
+public class PrincipalActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
 
@@ -21,7 +24,7 @@ public class PortadaPrincipalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_portada_principal);
+        setContentView(R.layout.activity_principal);
 
         LinearLayout iconoGestionAlimentos = findViewById(R.id.iconGestionAliementos);
         LinearLayout iconoControlTemperatura = findViewById(R.id.icono_temperatura);
@@ -37,17 +40,17 @@ public class PortadaPrincipalActivity extends AppCompatActivity {
         });
 
         iconoGestionAlimentos.setOnClickListener(view->{
-            Intent intent = new Intent(PortadaPrincipalActivity.this, GestionAlimentos.class);
+            Intent intent = new Intent(PrincipalActivity.this, GestionAlimentosActivity.class);
             startActivity(intent);
         });
 
         iconoControlTemperatura.setOnClickListener(view ->{
-            Intent intent = new Intent(PortadaPrincipalActivity.this, ControlTemperaturasActivity.class);
+            Intent intent = new Intent(PrincipalActivity.this, ControlTemperaturasActivity.class);
             startActivity(intent);
         });
 
         iconoRecetas.setOnClickListener(view -> {
-            Intent intent = new Intent(PortadaPrincipalActivity.this, RecetasActivity.class);
+            Intent intent = new Intent(PrincipalActivity.this, RecetasActivity.class);
             startActivity(intent);
         });
     }

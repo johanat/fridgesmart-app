@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart;
+package fridgeSmart.fridgesmart.pantallas.detalletipocarne;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
-import fridgeSmart.fridgesmart.modelo.Carne;
+import fridgeSmart.fridgesmart.R;
 
 
 public class DetalleTipoCarneAdapter extends RecyclerView.Adapter<DetalleTipoCarneAdapter.CarneViewHolder> {
@@ -27,7 +27,7 @@ public class DetalleTipoCarneAdapter extends RecyclerView.Adapter<DetalleTipoCar
     @NonNull
     @Override
     public CarneViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detalle, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detalle_tipo_carne, parent, false);
         return new CarneViewHolder(v);
     }
 

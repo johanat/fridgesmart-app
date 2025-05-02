@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart.activity;
+package fridgeSmart.fridgesmart.pantallas.detalletipocarne;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,11 +16,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-import fridgeSmart.fridgesmart.modelo.Carne;
 import fridgeSmart.fridgesmart.R;
-import fridgeSmart.fridgesmart.DetalleTipoCarneAdapter;
 
-public class DetalleActivity extends AppCompatActivity {
+public class DetalleTipoCarneActivity extends AppCompatActivity {
     private List<Carne> carneList = new ArrayList<>();
     private List<Carne> listaSelecccionados = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -34,7 +32,7 @@ public class DetalleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.detalle_carne_activity);
+        setContentView(R.layout.activity_detalle_tipo_carne);
 
 
         recyclerView = findViewById(R.id.recyclerViewCarne);

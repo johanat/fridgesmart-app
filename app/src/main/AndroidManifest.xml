@@ -13,25 +13,25 @@
         android:theme="@style/Theme.FridgeSmart"
         tools:targetApi="31">
         <activity
-            android:name=".activity.DetalleActivity"
+            android:name=".pantallas.detalletipocarne.DetalleTipoCarneActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.RecetaSopaActivity"
+            android:name=".pantallas.recetasdetalle.RecetaSopaActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.RecetaPastaActivity"
+            android:name=".pantallas.recetasdetalle.RecetaPastaActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.RecetaTortitasActivity"
+            android:name=".pantallas.recetasdetalle.RecetaTortitasActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.RecetaSalmonActivity"
+            android:name=".pantallas.recetasdetalle.RecetaSalmonActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.RecetasActivity"
+            android:name=".pantallas.recetas.RecetasActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.PortadaPrincipalActivity"
+            android:name=".pantallas.principal.PrincipalActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,12 +39,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.GestionAlimentos" />
-        <activity android:name=".activity.CarnesActivity" />
-        <activity android:name=".activity.LacteosActivity" />
-        <activity android:name=".activity.FrutasActivity" />
-        <activity android:name=".activity.VerdurasActivity" />
-        <activity android:name=".activity.ControlTemperaturasActivity" />
+        <activity android:name=".pantallas.gestionalimentos.GestionAlimentosActivity" />
+        <activity android:name=".pantallas.tipocarne.TipoCarneActivity" />
+        <activity android:name=".pantallas.tipolacteos.TipoLacteoActivity" />
+        <activity android:name=".pantallas.tipofruta.TipoFrutaActivity" />
+        <activity android:name=".pantallas.tipoverdura.TipoVerduraActivity" />
+        <activity android:name=".pantallas.controltemperatura.ControlTemperaturasActivity" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart.modelo;
+package fridgeSmart.fridgesmart.pantallas.detalletipocarne;
 
 import java.io.Serializable;
 

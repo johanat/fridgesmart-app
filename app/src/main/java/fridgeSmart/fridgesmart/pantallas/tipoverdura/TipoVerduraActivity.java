@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart.activity;
+package fridgeSmart.fridgesmart.pantallas.tipoverdura;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,15 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import fridgeSmart.fridgesmart.modelo.TipoCarne;
-import fridgeSmart.fridgesmart.TipoCarneAdapter;
+import fridgeSmart.fridgesmart.pantallas.tipocarne.TipoCarne;
+import fridgeSmart.fridgesmart.pantallas.tipocarne.TipoCarneAdapter;
 import fridgeSmart.fridgesmart.R;
+import fridgeSmart.fridgesmart.pantallas.gestionalimentos.GestionAlimentosActivity;
 
-public class VerdurasActivity extends GestionAlimentos {
+public class TipoVerduraActivity extends GestionAlimentosActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.verduras);
+        setContentView(R.layout.activity_tipo_verdura);
         ImageView regresar = findViewById(R.id.backButton);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -33,7 +34,7 @@ public class VerdurasActivity extends GestionAlimentos {
         tipoCarneList.add(new TipoCarne(R.drawable.pimientos, 6,"pimientos","VERDURAS"));
 
         regresar.setOnClickListener(view -> {
-            Intent retroceder = new Intent(VerdurasActivity.this, GestionAlimentos.class);
+            Intent retroceder = new Intent(TipoVerduraActivity.this, GestionAlimentosActivity.class);
             finish();
         });
 

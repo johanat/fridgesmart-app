@@ -1,4 +1,4 @@
-package fridgeSmart.fridgesmart;
+package fridgeSmart.fridgesmart.pantallas.tipocarne;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import fridgeSmart.fridgesmart.modelo.TipoCarne;
+import fridgeSmart.fridgesmart.R;
 
 public class TipoCarneAdapter extends RecyclerView.Adapter<TipoCarneAdapter.ViewHolder> {
     private List<TipoCarne> tipoCarneList;
