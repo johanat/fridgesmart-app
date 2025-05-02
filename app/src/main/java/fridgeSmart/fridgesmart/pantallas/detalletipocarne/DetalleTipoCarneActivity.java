@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fridgeSmart.fridgesmart.R;
+import fridgeSmart.fridgesmart.pantallas.principal.PrincipalActivity;
 
 public class DetalleTipoCarneActivity extends AppCompatActivity {
     private List<Carne> carneList = new ArrayList<>();
-    private List<Carne> listaSelecccionados = new ArrayList<>();
     private RecyclerView recyclerView;
     private DetalleTipoCarneAdapter detalleTipoCarneAdapter;
     private LinearLayout linearLayout;
@@ -34,19 +34,17 @@ public class DetalleTipoCarneActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_detalle_tipo_carne);
 
-
         recyclerView = findViewById(R.id.recyclerViewCarne);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         btnEliminar = findViewById(R.id.btnEliminar);
 
-
         // Llenamos la lista de carnes (esto puede venir de cualquier fuente de datos)
-        llenarListaDeCarnes();
         Intent intent = getIntent();
         String tipoCarne = intent.getStringExtra("tipoCarne");
         Log.d("DetalleActivity", "Tipo de carne recibido: " + tipoCarne);
 
-        List<Carne> listaFiltrada = getListaDeTipo(tipoCarne);
+        List<Carne> carneList = PrincipalActivity.repositorio.obtenerCarnes();
+        List<Carne> listaFiltrada = getListaDeTipo(carneList, tipoCarne);
 
         // Creamos el adaptador y lo asignamos al RecyclerView
         detalleTipoCarneAdapter = new DetalleTipoCarneAdapter(listaFiltrada, btnEliminar, () -> {
@@ -66,22 +64,7 @@ public class DetalleTipoCarneActivity extends AppCompatActivity {
 
     }
 
-    // Método para llenar la lista de carnes
-    private void llenarListaDeCarnes() {
-        // como creo una lista de carne la misma que sera usada en el adapter y en el holder
-
-        carneList.add(new Carne("Carne", "Chuleta de Cerdo", 2.5));
-        carneList.add(new Carne("Carne", "Filete de Ternera", 3.0));
-        carneList.add(new Carne("Carne", "Lomo de Cerdo", 1.0));
-        carneList.add(new Carne("Carne", "Higado de ternera", 1.5));
-        carneList.add(new Carne("Pollo", "Muslos de pollo", 2.0));
-        carneList.add(new Carne("Pollo", "Pechuga de pollo", 1.5));
-        carneList.add(new Carne("Pollo", "Calamar", 1.5));
-        carneList.add(new Carne("Pescado", "Meluza", 2.5));
-        carneList.add(new Carne("Pescado", "Salmón", 3.0));
-    }
-
-    private List<Carne> getListaDeTipo(String tipo) {
+    private List<Carne> getListaDeTipo(List<Carne> carneList, String tipo) {
         List<Carne> listaFiltrada = new ArrayList<>();
         for (Carne carne : carneList) {
             if (carne.getTipo().equalsIgnoreCase(tipo)) {

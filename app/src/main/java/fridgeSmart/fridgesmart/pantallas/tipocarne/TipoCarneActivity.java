@@ -31,10 +31,10 @@ public class TipoCarneActivity extends GestionAlimentosActivity {
 
 
         List<TipoCarne> tipoCarneCategoriaCarnes = new ArrayList<>();
-        tipoCarneCategoriaCarnes.add(new TipoCarne(R.drawable.carne_animada,  5, "carne", "CARNES"));
+        tipoCarneCategoriaCarnes.add(new TipoCarne(R.drawable.carne_animada,  5, "carne", "CARNE"));
         tipoCarneCategoriaCarnes.add(new TipoCarne(R.drawable.pollo,  3, "pollo", "POLLO"));
         tipoCarneCategoriaCarnes.add(new TipoCarne(R.drawable.pescado, 2, "pescado", "PESCADO"));
-        tipoCarneCategoriaCarnes.add(new TipoCarne(R.drawable.salchicha,  6, "embutidos", "EMBUTIDOS"));
+        tipoCarneCategoriaCarnes.add(new TipoCarne(R.drawable.salchicha,  6, "embutidos", "EMBUTIDO"));
 
         regresar.setOnClickListener(view ->{
             finish();

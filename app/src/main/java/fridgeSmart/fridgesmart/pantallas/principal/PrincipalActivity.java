@@ -15,16 +15,20 @@ import fridgeSmart.fridgesmart.R;
 import fridgeSmart.fridgesmart.pantallas.recetas.RecetasActivity;
 import fridgeSmart.fridgesmart.pantallas.controltemperatura.ControlTemperaturasActivity;
 import fridgeSmart.fridgesmart.pantallas.gestionalimentos.GestionAlimentosActivity;
+import fridgeSmart.fridgesmart.repositorio.Repositorio;
 
 public class PrincipalActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
+    public static Repositorio repositorio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_principal);
+
+        repositorio = new Repositorio();
 
         LinearLayout iconoGestionAlimentos = findViewById(R.id.iconGestionAliementos);
         LinearLayout iconoControlTemperatura = findViewById(R.id.icono_temperatura);
