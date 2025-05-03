@@ -2,6 +2,6 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.FridgeSmart" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <tipoCarne name="colorPrimary">@color/my_dark_primary</tipoCarne> -->
+        <!-- <subcategoriaCarne name="colorPrimary">@color/my_dark_primary</subcategoriaCarne> -->
     </style>
 </resources>

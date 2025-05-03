@@ -1,22 +1,18 @@
-package fridgeSmart.fridgesmart.pantallas.tipocarne;
+package fridgeSmart.fridgesmart.pantallas.subcategoriacarne;
 
-public class TipoCarne {
+public class SubcategoriaCarne {
     private int imageId;
     private int cantidad;
     private String nombre;
-    private String tipo;
 
-    public TipoCarne(int imageId, int cantidad, String nombre, String tipo) {
+    public SubcategoriaCarne(int imageId, int cantidad, String nombre) {
         this.imageId = imageId;
         this.cantidad = cantidad;
         this.nombre=nombre;
-        this.tipo = tipo;
     }
 
     public int getImageId() { return imageId; }
     public int getCantidad() { return cantidad; }
     public String getNombre(){return nombre;}
-    public String getTipo(){return tipo;}
-
 
 }

@@ -1,25 +1,30 @@
-package fridgeSmart.fridgesmart.pantallas.tipocarne;
+package fridgeSmart.fridgesmart.pantallas.subcategoriacarne;
+
+import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA;
+import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA_CARNE;
+import static fridgeSmart.fridgesmart.comun.Constantes.SUBCATEGORIA_CARNE;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
+
 import java.util.List;
 
-import fridgeSmart.fridgesmart.pantallas.detalletipocarne.Carne;
+import fridgeSmart.fridgesmart.MyApp;
+import fridgeSmart.fridgesmart.pantallas.alimentos.Carne;
 import fridgeSmart.fridgesmart.R;
-import fridgeSmart.fridgesmart.pantallas.detalletipocarne.DetalleTipoCarneActivity;
+import fridgeSmart.fridgesmart.pantallas.alimentos.AlimentosActivity;
 import fridgeSmart.fridgesmart.pantallas.gestionalimentos.GestionAlimentosActivity;
 import fridgeSmart.fridgesmart.pantallas.principal.PrincipalActivity;
 
-public class TipoCarneActivity extends GestionAlimentosActivity {
+public class SubcategoriaCarneActivity extends GestionAlimentosActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         List<Carne> listaFiltrado = (List<Carne>) getIntent().getSerializableExtra("listaCarne");
 
-        setContentView(R.layout.activity_tipo_carne);
+        setContentView(R.layout.activity_subcategoria_carne);
         ImageView regresar = findViewById(R.id.backButton);
 
 
@@ -31,17 +36,18 @@ public class TipoCarneActivity extends GestionAlimentosActivity {
         List<Carne> listaRecibida = (List<Carne>) getIntent().getSerializableExtra("listaCarne");
 
 
-        List<TipoCarne> tipoCarneCategoriaCarnes = PrincipalActivity.repositorio.obtenerTipoCarne();
+        List<SubcategoriaCarne> subcategoriaCarneCategoriaCarnes = ((MyApp) getApplication()).repositorio.obtenerSubcategoriaCarne();
 
         regresar.setOnClickListener(view ->{
             finish();
         });
 
-        TipoCarneAdapter adapter = new TipoCarneAdapter(tipoCarneCategoriaCarnes, new TipoCarneAdapter.OnItemClickListener() {
+        SubcategoriaCarneAdapter adapter = new SubcategoriaCarneAdapter(subcategoriaCarneCategoriaCarnes, new SubcategoriaCarneAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(TipoCarne tipoCarne) {
-                Intent intent = new Intent(TipoCarneActivity.this, DetalleTipoCarneActivity.class);
-                intent.putExtra("tipoCarne", tipoCarne.getTipo());
+            public void onItemClick(SubcategoriaCarne subcategoriaCarne) {
+                Intent intent = new Intent(SubcategoriaCarneActivity.this, AlimentosActivity.class);
+                intent.putExtra(CATEGORIA, CATEGORIA_CARNE);
+                intent.putExtra(SUBCATEGORIA_CARNE,subcategoriaCarne.getNombre());
                 startActivity(intent);
             }
         });
