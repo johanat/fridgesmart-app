@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,7 +14,7 @@
         android:theme="@style/Theme.FridgeSmart"
         tools:targetApi="31">
         <activity
-            android:name=".pantallas.detalletipocarne.DetalleTipoCarneActivity"
+            android:name=".pantallas.alimentos.AlimentosActivity"
             android:exported="false" />
         <activity
             android:name=".pantallas.recetasdetalle.RecetaSopaActivity"
@@ -40,10 +41,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".pantallas.gestionalimentos.GestionAlimentosActivity" />
-        <activity android:name=".pantallas.tipocarne.TipoCarneActivity" />
-        <activity android:name=".pantallas.tipolacteos.TipoLacteoActivity" />
-        <activity android:name=".pantallas.tipofruta.TipoFrutaActivity" />
-        <activity android:name=".pantallas.tipoverdura.TipoVerduraActivity" />
+        <activity android:name=".pantallas.subcategoriacarne.SubcategoriaCarneActivity" />
+        <activity android:name=".pantallas.anadiralimento.AnadirAlimentosActivity" />
         <activity android:name=".pantallas.controltemperatura.ControlTemperaturasActivity" />
     </application>
 
