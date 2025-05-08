@@ -30,7 +30,6 @@ public class AlimentosActivity extends AppCompatActivity {
     private List<Carne> carneList = new ArrayList<>();
     private RecyclerView recyclerView;
     private AlimentosAdapter alimentosAdapter;
-    private LinearLayout linearLayout;
     private FloatingActionButton btnEliminar;
     private FloatingActionButton btnAgregar;
     private FloatingActionButton btnModificar;
@@ -101,7 +100,7 @@ public class AlimentosActivity extends AppCompatActivity {
         return listaFiltrada;
     }
 
-    // Método para manejar el botón de aceptar
+    // Método para manejar el botón de eliminar
     private void onBtnEliminarClick() {
         //crear un Dialogo para borrar los elementos seleccionados
         new AlertDialog.Builder(this)

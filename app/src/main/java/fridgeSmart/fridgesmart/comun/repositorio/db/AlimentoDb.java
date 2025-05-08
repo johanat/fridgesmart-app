@@ -30,4 +30,7 @@ public class AlimentoDb {
         this.selecionado = selecionado;
         this.descartado = descartado;
     }
+    public boolean descartado() {
+        return cantidad <= 0 && kilos == 0.0;
+    }
 }
