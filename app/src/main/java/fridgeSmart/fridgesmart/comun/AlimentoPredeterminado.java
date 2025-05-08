@@ -7,12 +7,15 @@ public class AlimentoPredeterminado {
     public String subcategoria;
     public String nombre;
     public boolean selecionado;
+    public boolean descartado;
 
-    public AlimentoPredeterminado(String categoria, String subcategoria, int imagenId, String nombre, boolean selecionado) {
+
+    public AlimentoPredeterminado(String categoria, String subcategoria, int imagenId, String nombre, boolean selecionado, boolean descartado) {
         this.categoria = categoria;
         this.subcategoria = subcategoria;
         this.nombre = nombre;
         this.imagenId = imagenId;
         this.selecionado = selecionado;
+        this.descartado = descartado;
     }
 }

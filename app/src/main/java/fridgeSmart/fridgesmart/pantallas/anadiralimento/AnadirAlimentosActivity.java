@@ -58,6 +58,7 @@ public class AnadirAlimentosActivity extends AppCompatActivity {
 
     private AlimentoDb quitarSeleccion(AlimentoDb alimento) {
         // Crear una nueva instancia de AlimentoDb con el campo "select" en false
-        return new AlimentoDb(alimento.idAlimentoPredeterminado, alimento.imagenId, alimento.categoria, alimento.subcategoria, alimento.nombre, alimento.cantidad, alimento.kilos, alimento.fechaCaducidad, false);
+        return new AlimentoDb(alimento.idAlimentoPredeterminado, alimento.imagenId, alimento.categoria, alimento.subcategoria, alimento.nombre, alimento.cantidad, alimento.kilos, alimento.fechaCaducidad, false,
+                false);
     }
 }

@@ -1,5 +1,8 @@
 package fridgeSmart.fridgesmart.pantallas.alimentos;
 
+import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA_CARNE;
+import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA_LACTEO;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,9 +52,25 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.Alim
         AlimentoDb alimento = alimentoEntities.get(position);
 
         holder.nombre.setText(alimento.nombre);
-        holder.kilos.setText(alimento.kilos + " kg");
+        //mostrar kilos en carne y del resto alimentos cantidad  con un switch
+        switch(alimento.categoria){
+            case CATEGORIA_CARNE:
+                holder.kilos.setText(alimento.kilos + " kg");
+                break;
+            case CATEGORIA_LACTEO:
+                if (alimento.nombre.equalsIgnoreCase("leche")) {
+                    holder.kilos.setText(alimento.kilos + " L");
+                } else if (alimento.nombre.toLowerCase().contains("yogur")) {
+                    holder.kilos.setText(alimento.cantidad + " uds");
+                } else {
+                    holder.kilos.setText(alimento.kilos + " kg");
+                }
+                break;
+            default:
+                holder.kilos.setText(alimento.cantidad + " uds");
+                break;
+        }
         holder.imagenAlimento.setImageResource(alimento.imagenId);
-
         holder.checkBox.setOnCheckedChangeListener(null);
         holder.checkBox.setChecked(alimento.selecionado);
         holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -60,6 +79,18 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.Alim
                 listener.onCambioSeleccionCarne();
             }
         });
+
+        //aplicar estilo a los elementos descartados
+        boolean isDescartado = alimento.descartado();
+
+        if (isDescartado) {
+            holder.itemView.setAlpha(0.5f); // Opacidad baja
+            holder.nombre.setPaintFlags(holder.nombre.getPaintFlags() | android.graphics.Paint.STRIKE_THRU_TEXT_FLAG); // Tachado
+        } else {
+            holder.itemView.setAlpha(1.0f); // Normal
+            holder.nombre.setPaintFlags(holder.nombre.getPaintFlags() & (~android.graphics.Paint.STRIKE_THRU_TEXT_FLAG)); // Quitar tachado
+        }
+
 
         if (alimento.id != null && alimento.id.equals(idExpandido)) {
             holder.layoutDetalles.setVisibility(View.VISIBLE);
@@ -72,6 +103,7 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.Alim
             holder.editCaducidad.setText(alimento.fechaCaducidad != null ? alimento.fechaCaducidad : "");
 
             holder.btnGuardar.setOnClickListener(v -> {
+
                 // Actualizar objeto alimento con nuevos valores desde los campos
                 if(!holder.editCantidad.getText().toString().isEmpty()) {
                     alimento.cantidad = Integer.parseInt(holder.editCantidad.getText().toString());
@@ -85,6 +117,17 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.Alim
                     alimento.kilos = 0f;
                 }
                 alimento.fechaCaducidad = holder.editCaducidad.getText().toString();
+
+
+                if (isDescartado) {
+                    holder.itemView.setAlpha(0.5f); // Opacidad baja para los elementos descartados
+                    holder.nombre.setPaintFlags(holder.nombre.getPaintFlags() | android.graphics.Paint.STRIKE_THRU_TEXT_FLAG); // Tachado para los alimentos descartados
+                } else {
+                    holder.itemView.setAlpha(1.0f); // Normal para los alimentos no descartados
+                    holder.nombre.setPaintFlags(holder.nombre.getPaintFlags() & (~android.graphics.Paint.STRIKE_THRU_TEXT_FLAG)); // Quitar tachado
+                }
+                notifyDataSetChanged();
+
 
                 if (guardarListener != null) {
                     guardarListener.onGuardarAlimento(alimento);
@@ -108,6 +151,7 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.Alim
             }
         }
         notifyDataSetChanged();
+
     }
 
     public void dejarDeEditarElementoSeleccionado() {
