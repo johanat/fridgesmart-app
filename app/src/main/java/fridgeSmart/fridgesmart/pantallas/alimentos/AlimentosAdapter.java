@@ -1,5 +1,9 @@
 package fridgeSmart.fridgesmart.pantallas.alimentos;
 
+import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA_CARNE;
+import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA_LACTEO;
+import static fridgeSmart.fridgesmart.comun.Constantes.SUBCATEGORIA_CARNE;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +53,25 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.Alim
         AlimentoDb alimento = alimentoEntities.get(position);
 
         holder.nombre.setText(alimento.nombre);
-        holder.kilos.setText(alimento.kilos + " kg");
+        //mostrar kilos en carne y del resto alimentos cantidad  con un switch
+        switch(alimento.categoria){
+            case CATEGORIA_CARNE:
+                holder.kilos.setText(alimento.kilos + " kg");
+                break;
+            case CATEGORIA_LACTEO:
+                if (alimento.nombre.equalsIgnoreCase("leche")) {
+                    holder.kilos.setText(alimento.kilos + " L");
+                } else if (alimento.nombre.toLowerCase().contains("yogur")) {
+                    holder.kilos.setText(alimento.cantidad + " uds");
+                } else {
+                    holder.kilos.setText(alimento.kilos + " kg");
+                }
+                break;
+            default:
+                holder.kilos.setText(alimento.cantidad + " uds");
+                break;
+        }
+       // holder.kilos.setText(alimento.kilos + " kilos");
         holder.imagenAlimento.setImageResource(alimento.imagenId);
 
         holder.checkBox.setOnCheckedChangeListener(null);

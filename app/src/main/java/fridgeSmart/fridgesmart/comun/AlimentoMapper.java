@@ -17,7 +17,9 @@ public class AlimentoMapper {
                 0,                 // cantidad
                 0.0,               // kilos
                 "",                // fechaCaducidad
-                predeterminado.selecionado
+                predeterminado.selecionado,
+                false              // descartado
+
         );
     }
 

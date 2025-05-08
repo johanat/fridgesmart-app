@@ -16,8 +16,9 @@ public class AlimentoDb {
     public double kilos;
     public String fechaCaducidad;
     public boolean selecionado;
+    public boolean descartado;
 
-    public AlimentoDb(int idAlimentoPredeterminado, int imagenId, String categoria, String subcategoria, String nombre, int cantidad, double kilos, String fechaCaducidad, boolean selecionado) {
+    public AlimentoDb(int idAlimentoPredeterminado, int imagenId, String categoria, String subcategoria, String nombre, int cantidad, double kilos, String fechaCaducidad, boolean selecionado, boolean descartado) {
         this.idAlimentoPredeterminado = idAlimentoPredeterminado;
         this.imagenId = imagenId;
         this.categoria = categoria;
@@ -27,5 +28,6 @@ public class AlimentoDb {
         this.kilos = kilos;
         this.fechaCaducidad = fechaCaducidad;
         this.selecionado = selecionado;
+        this.descartado = descartado;
     }
 }
