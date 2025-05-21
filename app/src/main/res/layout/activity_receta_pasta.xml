@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F3E7"
+    android:padding="16dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Flecha de retroceso en la esquina superior izquierda -->
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="25dp"
+            android:layout_height="32dp"
+            android:layout_margin="16dp"
+            android:layout_gravity="start|top"
+            android:contentDescription="Volver"
+            android:src="@drawable/flecha_negro" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <!-- Imagen del plato -->
+            <ImageView
+                android:id="@+id/imagenReceta"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/spagetti" />
+
+            <!-- Título de la receta -->
+            <TextView
+                android:id="@+id/tituloReceta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="Pasta Farfalle con Champiñones"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Sección de dificultad y tiempo -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#bfc3b5"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="31dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/cuchara" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:text="Fácil"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="31dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/time_receta" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:text="30 min"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Ingredientes -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:text="Ingredientes"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ingredientesReceta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="- 250 g de pasta farfalle\n- 200 g de champiñones frescos (laminados)\n- 2 cdas. de aceite de oliva\n- 2 dientes de ajo (picados)\n- 200 ml de nata para cocinar\n- 50 g de queso parmesano rallado\n- Sal y pimienta al gusto\n- Perejil fresco picado (opcional)"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <!-- Preparación -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:text="Preparación"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/preparacionReceta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="1. Cocina la pasta farfalle en agua con sal según las instrucciones del paquete. Escurre y reserva.\n2. En una sartén, calienta el aceite de oliva y sofríe el ajo picado hasta que esté fragante.\n3. Añade los champiñones y cocínalos hasta que estén tiernos y hayan soltado su jugo.
+                    \n4. Vierte la nata para cocinar, agrega el queso parmesano y mezcla bien. Cocina a fuego lento hasta que la salsa espese ligeramente.\n5. Incorpora la pasta cocida, mezcla bien y ajusta la sal y la pimienta al gusto.\n6. Sirve caliente y decora con perejil fresco picado si lo deseas. ¡Disfruta! 🍝✨"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </FrameLayout>
+</ScrollView>

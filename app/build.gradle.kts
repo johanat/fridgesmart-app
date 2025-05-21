@@ -33,6 +33,34 @@ android {
 
 dependencies {
 
+    implementation(libs.room.runtime)
+    implementation(libs.room.common.jvm)
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation ("androidx.recyclerview:recyclerview:1.3.0")
+
+
+
+    // If this project only uses Java source, use the Java annotationProcessor
+    // No additional plugins are necessary
+    annotationProcessor(libs.room.compiler)
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation(libs.room.ktx)
+
+    // optional - RxJava2 support for Room
+    implementation(libs.room.rxjava2)
+
+    // optional - RxJava3 support for Room
+    implementation(libs.room.rxjava3)
+
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation(libs.room.guava)
+
+    // optional - Test helpers
+    testImplementation(libs.room.testing)
+
+    // optional - Paging 3 Integration
+    implementation(libs.room.paging)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -40,4 +68,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    
+
 }
