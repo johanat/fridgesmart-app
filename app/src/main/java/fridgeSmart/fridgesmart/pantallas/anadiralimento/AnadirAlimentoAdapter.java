@@ -84,7 +84,9 @@ public class AnadirAlimentoAdapter extends RecyclerView.Adapter<AnadirAlimentoAd
         holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             AlimentoDb.selecionado = isChecked;
             holder.extraFieldsLayout.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-            selectionChangedListener.onSelectionChanged();
+            if (selectionChangedListener != null) {
+                selectionChangedListener.onSelectionChanged();
+            }
         });
 
         // Listeners para actualizar los datos del objeto
@@ -92,6 +94,9 @@ public class AnadirAlimentoAdapter extends RecyclerView.Adapter<AnadirAlimentoAd
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 AlimentoDb.cantidad = s.length() > 0 ? Integer.parseInt(s.toString()) : 0;
+                if (selectionChangedListener != null) {
+                    selectionChangedListener.onSelectionChanged();
+                }
             }
         });
 
@@ -99,6 +104,9 @@ public class AnadirAlimentoAdapter extends RecyclerView.Adapter<AnadirAlimentoAd
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 AlimentoDb.kilos = s.length() > 0 ? Double.parseDouble(s.toString()) : 0.0;
+                if (selectionChangedListener != null) {
+                    selectionChangedListener.onSelectionChanged();
+                }
             }
         });
 
@@ -106,6 +114,9 @@ public class AnadirAlimentoAdapter extends RecyclerView.Adapter<AnadirAlimentoAd
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 AlimentoDb.fechaCaducidad = s.toString();
+                if (selectionChangedListener != null) {
+                    selectionChangedListener.onSelectionChanged();
+                }
             }
         });
     }

@@ -34,6 +34,10 @@ public class AlimentosActivity extends AppCompatActivity {
     private FloatingActionButton btnAgregar;
     private FloatingActionButton btnModificar;
 
+    private String categoriaAlimento;
+    private String subcategoriaCarne; // Solo se usará si es categoría carne
+
+
     private List<AlimentoDb> alimentos;
 
     @Override
@@ -52,9 +56,9 @@ public class AlimentosActivity extends AppCompatActivity {
 
         // Llenamos la lista de carnes (esto puede venir de cualquier fuente de datos)
         Intent intent = getIntent();
-        String categoriaAlimento = intent.getStringExtra(CATEGORIA);
+        categoriaAlimento = intent.getStringExtra(CATEGORIA);
 
-        //Escuchar botnoes flotantes
+        //Escuchar botones flotantes
         btnEliminar.setOnClickListener(v -> {
             onBtnEliminarClick();
         });
@@ -66,7 +70,7 @@ public class AlimentosActivity extends AppCompatActivity {
         });
 
         if (categoriaAlimento.equals(CATEGORIA_CARNE)) {
-            String subcategoriaCarne = intent.getStringExtra(SUBCATEGORIA_CARNE);
+            subcategoriaCarne = intent.getStringExtra(SUBCATEGORIA_CARNE);
             ((MyApp) getApplication()).repositorio.getCarnesDeGrupo(subcategoriaCarne).observe(this, alimentos -> {
                 //Alimentos es de una categoria especifica (ya está filtrada)
                 this.alimentos = alimentos;
@@ -87,6 +91,10 @@ public class AlimentosActivity extends AppCompatActivity {
 
     private void onBtnAgregarClick() {
         Intent intent = new Intent(this, AnadirAlimentosActivity.class);
+        intent.putExtra(CATEGORIA,categoriaAlimento);
+        if(CATEGORIA_CARNE.equals(categoriaAlimento) && subcategoriaCarne != null){
+            intent.putExtra(SUBCATEGORIA_CARNE,subcategoriaCarne);
+        }
         startActivity(intent);
     }
 
