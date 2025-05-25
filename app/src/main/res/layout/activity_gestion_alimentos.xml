@@ -5,144 +5,160 @@
     android:layout_height="match_parent"
     android:background="#EFEFEF">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#EFEFEF">
-
-    <!-- Franja superior -->
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:padding="14dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:background="#316986"> <!-- Color de fondo -->
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#EFEFEF">
 
-        <!-- Icono de retroceso -->
-        <ImageView
-            android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:padding="12dp"
-            android:src="@drawable/ic_back"
-            android:layout_centerVertical="true"
-            android:contentDescription="Volver"
-            app:tint="#FFFFFF" />
-
-        <!-- Texto centrado -->
-        <TextView
+        <!-- Franja superior -->
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="GESTIÓN DE ALIMENTOS"
-            android:textColor="#FFFFFF"
+            android:layout_height="100dp"
+            android:padding="14dp"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:layout_gravity="center"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_centerInParent="true"/>
-    </RelativeLayout>
+            android:background="#316986"> <!-- Color de fondo -->
 
-    <!-- Contenido debajo de la franja -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-       android:layout_margin="36dp"
-        android:background="#FFFFFF"
-        android:orientation="horizontal"
-        android:gravity="center">
+            <!-- Icono de retroceso -->
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="12dp"
+                android:src="@drawable/ic_back"
+                android:layout_centerVertical="true"
+                android:contentDescription="Volver"
+                app:tint="#FFFFFF" />
 
-        <ImageView
-            android:id="@+id/buscador"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_buscador" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="¿Que estas buscando?"
-            android:textSize="14dp"
-            android:gravity="center">
-        </TextView>
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_filtro" />
-
-        <!-- Fila 2 -->
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="46dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/icon_Carnes"
-            android:layout_width="110dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="36dp"
-            android:background="@drawable/cuadrado_puntas_redondas"
-            android:backgroundTint="#bbd7d7"
-            android:orientation="vertical">
-
+            <!-- Texto centrado -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="GESTIÓN DE ALIMENTOS"
+                android:textColor="#FFFFFF"
                 android:gravity="center"
-                android:layout_marginTop="8dp"
-                android:textStyle="bold"
-                android:text="CARNE"></TextView>
-
-            <ImageView
-                android:layout_width="85dp"
-                android:layout_height="85dp"
                 android:layout_gravity="center"
-                android:src="@drawable/carne"></ImageView>
-        </LinearLayout>
-
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+<!--
+         Contenido debajo de la franja
         <LinearLayout
-            android:id="@+id/iconoLacteos"
-            android:layout_width="110dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+           android:layout_margin="36dp"
             android:background="@drawable/cuadrado_puntas_redondas"
-            android:backgroundTint="#bbd7d7"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="8dp"
-                android:textStyle="bold"
-                android:text="LACTEOS" />
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
             <ImageView
-                android:id="@+id/icon_leche"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:layout_gravity="center"
-                android:src="@drawable/leche">
-            </ImageView>
+                android:id="@+id/searchIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_buscador" />
+
+            <EditText
+                android:id="@+id/searchInput"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="¿Qué estás buscando?"
+                android:textSize="14sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:background="@null"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1">
+
+            </EditText>
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="42dp"
+                android:layout_height="41dp"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_filtro" />
         </LinearLayout>
-    </LinearLayout>
+    -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="130dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/icon_Carnes"
+                android:layout_width="110dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:background="@drawable/cuadrado_puntas_redondas"
+                android:backgroundTint="#bbd7d7"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="CARNE"
+                    android:textStyle="bold">
+                </TextView>
+
+                <ImageView
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/carne">
+                </ImageView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/iconoLacteos"
+                android:layout_width="110dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:background="@drawable/cuadrado_puntas_redondas"
+                android:backgroundTint="#bbd7d7"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="LACTEOS"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/icon_leche"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/leche">
+                </ImageView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="46dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -150,23 +166,27 @@
                 android:id="@+id/iconoFrutas"
                 android:layout_width="110dp"
                 android:layout_height="120dp"
-                android:layout_marginEnd="36dp"
-                android:orientation="vertical"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
                 android:background="@drawable/cuadrado_puntas_redondas"
-                android:backgroundTint="#bbd7d7">
+                android:backgroundTint="#bbd7d7"
+                android:orientation="vertical"
+                android:gravity="center">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginTop="8dp"
-                    android:textStyle="bold"
-                    android:text="FRUTAS" />
+                    android:gravity="center"
+                    android:text="FRUTAS"
+                    android:textStyle="bold"/>
 
                 <ImageView
                     android:layout_width="85dp"
                     android:layout_height="85dp"
                     android:layout_gravity="center"
                     android:src="@drawable/frutas">
+
                 </ImageView>
             </LinearLayout>
 
@@ -174,23 +194,29 @@
                 android:id="@+id/iconoVerduras"
                 android:layout_width="110dp"
                 android:layout_height="120dp"
-                android:orientation="vertical"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
                 android:background="@drawable/cuadrado_puntas_redondas"
-                android:backgroundTint="#bbd7d7">
+                android:backgroundTint="#bbd7d7"
+                android:orientation="vertical"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginTop="8dp"
-                    android:textStyle="bold"
-                    android:text="VERDURAS" />
+                    android:gravity="center"
+                    android:text="VERDURAS"
+                    android:textStyle="bold"/>
 
                 <ImageView
                     android:layout_width="120dp"
-                    android:layout_height="106dp"
+                    android:layout_height="80dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/verdura"></ImageView>
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/verdura">
+
+                </ImageView>
             </LinearLayout>
 
         </LinearLayout>

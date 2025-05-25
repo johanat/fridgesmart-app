@@ -41,30 +41,55 @@
         android:layout_marginTop="8dp"
         android:visibility="gone">
 
-        <EditText
-            android:id="@+id/editCantidad"
-            android:layout_width="0dp"
+        <!-- Layout para campos de carne (kilos) -->
+        <LinearLayout
+            android:id="@+id/layoutCarne"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:hint="Cantidad" />
+            android:orientation="horizontal"
+            android:visibility="gone">
 
-        <EditText
-            android:id="@+id/editKilos"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="numberDecimal"
-            android:hint="Kilos"
-            android:layout_marginStart="8dp" />
+            <EditText
+                android:id="@+id/editKilos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="numberDecimal"
+                android:hint="Kilos (kg)" />
 
-        <EditText
-            android:id="@+id/editFecha"
-            android:layout_width="0dp"
+            <EditText
+                android:id="@+id/editFecha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Fecha (opcional)"
+                android:inputType="date"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <!-- Layout para otras categorías (cantidad) -->
+        <LinearLayout
+            android:id="@+id/layoutOtros"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Fecha"
-            android:inputType="date"
-            android:layout_marginStart="8dp" />
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/editCantidad"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:hint="Cantidad" />
+
+            <EditText
+                android:id="@+id/editFechaOtros"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Fecha (opcional)"
+                android:inputType="date"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

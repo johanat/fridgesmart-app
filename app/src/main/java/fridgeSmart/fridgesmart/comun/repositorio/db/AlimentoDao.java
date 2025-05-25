@@ -34,4 +34,11 @@ public interface AlimentoDao {
     @Query("SELECT COUNT(*) FROM AlimentoDb WHERE categoria = :categoria AND subcategoria = :subcategoria")
     LiveData<Integer> contarAlimentosPorSubcategoriaLiveData(String categoria, String subcategoria);
 
+    @Query("SELECT * FROM AlimentoDb")
+    List<AlimentoDb> obtenerTodos();
+
+    // Nueva consulta para búsqueda general
+    @Query("SELECT * FROM AlimentoDb WHERE nombre LIKE '%' || :query || '%'")
+    LiveData<List<AlimentoDb>> buscarAlimentos(String query);
+
 }

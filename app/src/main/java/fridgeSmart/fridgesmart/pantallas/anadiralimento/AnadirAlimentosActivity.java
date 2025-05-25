@@ -9,6 +9,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -20,9 +22,11 @@ import fridgeSmart.fridgesmart.R;
 import fridgeSmart.fridgesmart.comun.AlimentoMapper;
 import fridgeSmart.fridgesmart.comun.AlimentoPredeterminado;
 import fridgeSmart.fridgesmart.comun.repositorio.db.AlimentoDb;
+import fridgeSmart.fridgesmart.notificaciones.CaducidadWorker;
 import fridgeSmart.fridgesmart.pantallas.principal.PrincipalActivity;
 
 import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA;
+import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA_CARNE;
 import static fridgeSmart.fridgesmart.comun.Constantes.SUBCATEGORIA_CARNE;
 public class AnadirAlimentosActivity extends AppCompatActivity {
 
@@ -66,15 +70,25 @@ public class AnadirAlimentosActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         AnadirAlimentoAdapter adapter = new AnadirAlimentoAdapter(alimentosFiltrados);
+
         adapter.setOnSelectionChangedListener(() -> {
             List<AlimentoDb> seleccionados = adapter.getAlimentosSelecionados();
             boolean camposValidos = true;
 
             for (AlimentoDb alimento : seleccionados) {
                 Log.d("VALIDACION", "alimento: " + alimento.nombre + ", cantidad: " + alimento.cantidad + ", kilos: " + alimento.kilos + ", fecha: " + alimento.fechaCaducidad);
-                if (alimento.cantidad <= 0 || alimento.kilos <= 0.0 ) {
-                    camposValidos = false;
-                    break;
+                if (CATEGORIA_CARNE.equals(alimento.categoria)) {
+                    // Validación para carnes (solo kilos)
+                    if (alimento.kilos <= 0.0) {
+                        camposValidos = false;
+                        break;
+                    }
+                } else {
+                    // Validación para otras categorías (solo cantidad)
+                    if (alimento.cantidad <= 0) {
+                        camposValidos = false;
+                        break;
+                    }
                 }
             }
 
@@ -91,6 +105,9 @@ public class AnadirAlimentosActivity extends AppCompatActivity {
                 //Aliment a guardar tiene que ser igual a alimento pero con el campo "select" en false
                 ((MyApp) getApplication()).repositorio.guardarAlimento(quitarSeleccion(alimento));
             }
+            // Lanzar el worker para la notificación inmediata
+            OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(CaducidadWorker.class).build();
+            WorkManager.getInstance(this).enqueue(workRequest);
             finish();
         });
     }

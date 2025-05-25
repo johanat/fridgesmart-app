@@ -146,7 +146,7 @@ public class Repositorio {
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.frutas, "Plátano",  false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.frutas, "Fresa",  false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.frutas, "Manzanas",  false,false));
-        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.uvas, "Uvas",  false,false));
+        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.frutas, "Uvas",  false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.frutas, "Naranjas", false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.frutas, "Durazno",  false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.frutas, "Kiwi",  false,false));
@@ -280,6 +280,10 @@ public class Repositorio {
 
     public LiveData<Integer> contarAlimentosPorSubcategoria(String categoria, String subcategoria) {
         return db.alimentoDao().contarAlimentosPorSubcategoriaLiveData(categoria, subcategoria);
+    }
+
+    public LiveData<List<AlimentoDb>> buscarAlimentos(String query) {
+        return db.alimentoDao().buscarAlimentos(query);
     }
 
 

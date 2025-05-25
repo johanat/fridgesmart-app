@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fridgeSmart.fridgesmart.R;
@@ -25,6 +26,7 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.Alim
     private List<AlimentoDb> alimentoEntities;
     public EnCambioSeleccionAlimentoEscuchador listener;
     private Integer idExpandido = null;
+    private List<AlimentoDb> listaOriginal;
 
     public interface EnGuardarAlimentoListener {
         void onGuardarAlimento(AlimentoDb alimento);
@@ -36,8 +38,14 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.Alim
                             EnCambioSeleccionAlimentoEscuchador listener,
                             EnGuardarAlimentoListener guardarListener) {
         this.alimentoEntities = alimentoEntities;
+        this.listaOriginal = new ArrayList<>(alimentoEntities);
         this.listener = listener;
         this.guardarListener = guardarListener;
+    }
+
+    public void actualizarLista(List<AlimentoDb> nuevaLista) {
+        this.alimentoEntities = nuevaLista;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -53,7 +61,7 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.Alim
 
         holder.nombre.setText(alimento.nombre);
         //mostrar kilos en carne y del resto alimentos cantidad  con un switch
-        switch(alimento.categoria){
+        /*switch(alimento.categoria){
             case CATEGORIA_CARNE:
                 holder.kilos.setText(alimento.kilos + " kg");
                 break;
@@ -69,7 +77,15 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.Alim
             default:
                 holder.kilos.setText(alimento.cantidad + " uds");
                 break;
+        }*/
+        if (CATEGORIA_CARNE.equalsIgnoreCase(alimento.categoria)) {
+            // SOLO PARA CARNES: Mostrar kilos (kg)
+            holder.kilos.setText(String.format("%.2f kg", alimento.kilos));
+        } else {
+            // PARA TODOS LOS DEMÁS (LÁCTEOS/FRUTAS/VERDURAS): Mostrar unidades (uds)
+            holder.kilos.setText(alimento.cantidad + " uds");
         }
+
         holder.imagenAlimento.setImageResource(alimento.imagenId);
         holder.checkBox.setOnCheckedChangeListener(null);
         holder.checkBox.setChecked(alimento.selecionado);
