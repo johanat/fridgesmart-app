@@ -35,6 +35,13 @@ dependencies {
 
     implementation(libs.room.runtime)
     implementation(libs.room.common.jvm)
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation ("androidx.recyclerview:recyclerview:1.3.0")
+
+    implementation ("androidx.room:room-runtime:2.6.1")
+    annotationProcessor ("androidx.room:room-compiler:2.6.1")
+    implementation ("androidx.work:work-runtime:2.9.0")
+
 
     // If this project only uses Java source, use the Java annotationProcessor
     // No additional plugins are necessary
@@ -64,5 +71,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    
 
 }

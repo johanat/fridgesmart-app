@@ -4,10 +4,16 @@ import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA;
 import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA_CARNE;
 import static fridgeSmart.fridgesmart.comun.Constantes.SUBCATEGORIA_CARNE;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
@@ -34,6 +40,13 @@ public class AlimentosActivity extends AppCompatActivity {
     private FloatingActionButton btnAgregar;
     private FloatingActionButton btnModificar;
 
+    private String categoriaAlimento;
+    private String subcategoriaCarne; // Solo se usará si es categoría carne
+
+    private EditText etBuscar;
+    private ImageView buscador;
+
+
     private List<AlimentoDb> alimentos;
 
     @Override
@@ -49,12 +62,34 @@ public class AlimentosActivity extends AppCompatActivity {
         btnAgregar = findViewById(R.id.btnAgregar);
         btnModificar = findViewById(R.id.btnModificar);
 
+        etBuscar = findViewById(R.id.etBuscar);
+        buscador = findViewById(R.id.buscador);
+
+        buscador.setOnClickListener(v -> {
+            etBuscar.requestFocus(); // Mueve el foco al EditText
+            // Abre el teclado
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(etBuscar, InputMethodManager.SHOW_IMPLICIT);
+        });
+
+        etBuscar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filtrarAlimentos(s.toString());            }
+        });
+
 
         // Llenamos la lista de carnes (esto puede venir de cualquier fuente de datos)
         Intent intent = getIntent();
-        String categoriaAlimento = intent.getStringExtra(CATEGORIA);
+        categoriaAlimento = intent.getStringExtra(CATEGORIA);
 
-        //Escuchar botnoes flotantes
+        //Escuchar botones flotantes
         btnEliminar.setOnClickListener(v -> {
             onBtnEliminarClick();
         });
@@ -66,7 +101,7 @@ public class AlimentosActivity extends AppCompatActivity {
         });
 
         if (categoriaAlimento.equals(CATEGORIA_CARNE)) {
-            String subcategoriaCarne = intent.getStringExtra(SUBCATEGORIA_CARNE);
+            subcategoriaCarne = intent.getStringExtra(SUBCATEGORIA_CARNE);
             ((MyApp) getApplication()).repositorio.getCarnesDeGrupo(subcategoriaCarne).observe(this, alimentos -> {
                 //Alimentos es de una categoria especifica (ya está filtrada)
                 this.alimentos = alimentos;
@@ -81,12 +116,37 @@ public class AlimentosActivity extends AppCompatActivity {
         }
     }
 
+    private void filtrarAlimentos(String textoBusqueda) {
+        if (alimentos == null) return;
+
+        List<AlimentoDb> listaFiltrada;
+        if (textoBusqueda.isEmpty()) {
+            listaFiltrada = new ArrayList<>(alimentos);
+        } else {
+            listaFiltrada = new ArrayList<>();
+            String busqueda = textoBusqueda.trim().toLowerCase();
+            for (AlimentoDb alimento : alimentos) {
+                if (alimento.nombre.toLowerCase().contains(busqueda)) {
+                    listaFiltrada.add(alimento);
+                }
+            }
+        }
+
+        if (alimentosAdapter != null) {
+            alimentosAdapter.actualizarLista(listaFiltrada);
+        }
+    }
+
     private void onBtnModificarClick() {
         alimentosAdapter.editarItemSeleccionado();
     }
 
     private void onBtnAgregarClick() {
         Intent intent = new Intent(this, AnadirAlimentosActivity.class);
+        intent.putExtra(CATEGORIA,categoriaAlimento);
+        if(CATEGORIA_CARNE.equals(categoriaAlimento) && subcategoriaCarne != null){
+            intent.putExtra(SUBCATEGORIA_CARNE,subcategoriaCarne);
+        }
         startActivity(intent);
     }
 
@@ -152,8 +212,24 @@ public class AlimentosActivity extends AppCompatActivity {
                             alimento.fechaCaducidad);
                     alimentosAdapter.dejarDeEditarElementoSeleccionado();
                 });
-        recyclerView.setAdapter(alimentosAdapter);
+        // Aplica el filtro actual si hay texto en el buscador
+        String textoBusqueda = etBuscar.getText().toString();
+        if (!textoBusqueda.isEmpty()) {
+            filtrarAlimentos(textoBusqueda);
+        } else {
+            recyclerView.setAdapter(alimentosAdapter);
+        }
     }
+/*
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            unregisterReceiver(receiver);
+        } catch (IllegalArgumentException e) {
+            Log.w("App", "Receiver ya estaba desregistrado");
+        }
+    }*/
 
 }
 

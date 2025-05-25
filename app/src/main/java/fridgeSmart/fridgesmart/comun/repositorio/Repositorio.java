@@ -25,6 +25,7 @@ import fridgeSmart.fridgesmart.comun.AlimentoPredeterminado;
 import fridgeSmart.fridgesmart.comun.repositorio.db.AlimentoDb;
 import fridgeSmart.fridgesmart.comun.repositorio.db.AppDatabase;
 import fridgeSmart.fridgesmart.pantallas.subcategoriacarne.SubcategoriaCarne;
+import fridgeSmart.fridgesmart.pantallas.subcategoriacarne.SubcategoriaCarneConContador;
 
 public class Repositorio {
     AppDatabase db;
@@ -83,9 +84,8 @@ public class Repositorio {
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_POLLO, R.drawable.pollo, "Pechuga de Pollo", false, false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_POLLO, R.drawable.pollo, "Contramuslo de Pollo", false, false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_POLLO, R.drawable.pollo, "Carcasa de Pollo", false, false));
-        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_CERDO, R.drawable.pollo, "Mollejas de Pollo", false, false));
-        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_CERDO, R.drawable.pollo, "Troceado de Pollo", false, false));
-        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_CERDO, R.drawable.pollo, "Pechuga de Pavo", false,    false));
+        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_POLLO, R.drawable.pollo, "Mollejas de Pollo", false, false));
+        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_POLLO, R.drawable.pollo, "Troceado de Pollo", false, false));
 
 
         //lista de carne de Pescado
@@ -94,9 +94,9 @@ public class Repositorio {
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_PESCADO, R.drawable.pescado, "Tacos de Salmon", false, false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_PESCADO, R.drawable.pescado, "Filetes de Atún", false, false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_PESCADO, R.drawable.pescado, "Lomos de Atún", false, false));
-        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_CERDO, R.drawable.pescado, "Filetes de Dorada", false, false));
+        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_PESCADO, R.drawable.pescado, "Filetes de Dorada", false, false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_PESCADO, R.drawable.pescado, "Dorada Entera", false, false));
-        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_CERDO, R.drawable.pescado, "Filetes de Calamar", false, false));
+        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_PESCADO, R.drawable.pescado, "Filetes de Calamar", false, false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_PESCADO, R.drawable.pescado, "Calamar Entero", false, false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_PESCADO, R.drawable.pescado, "Gambas Peladas Crudas", false,  false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_PESCADO, R.drawable.pescado, "Gambas Peladas Cocidas", false, false));
@@ -146,7 +146,7 @@ public class Repositorio {
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.frutas, "Plátano",  false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.frutas, "Fresa",  false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.frutas, "Manzanas",  false,false));
-        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.uvas, "Uvas",  false,false));
+        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.frutas, "Uvas",  false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.frutas, "Naranjas", false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.frutas, "Durazno",  false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.frutas, "Kiwi",  false,false));
@@ -208,7 +208,9 @@ public class Repositorio {
 
     public Repositorio(Context context) {
         db = Room.databaseBuilder(context.getApplicationContext(),
-                AppDatabase.class, "fridge-smart").build();
+                AppDatabase.class, "fridge-smart")
+                .fallbackToDestructiveMigration()  // 👈 Añades esto aquí, luego hay q cambiarlo, es de prueba
+                .build();
     }
 
     public void guardarAlimento(AlimentoDb alimentoDb) {
@@ -231,7 +233,7 @@ public class Repositorio {
         return db.alimentoDao().getAlimentosDeCategoria(categoria);
     }
 
-
+/*
     public List<SubcategoriaCarne> obtenerSubcategoriaCarne() {
         List<SubcategoriaCarne> subcategoriaCarneCategoriaCarnes = new ArrayList<>();
         subcategoriaCarneCategoriaCarnes.add(new SubcategoriaCarne(R.drawable.carne_animada, 5, SUBCATEGORIA_CARNE_TERNERA));
@@ -241,5 +243,48 @@ public class Repositorio {
         subcategoriaCarneCategoriaCarnes.add(new SubcategoriaCarne(R.drawable.salchicha, 6, SUBCATEGORIA_CARNE_EMBUTIDO));
 
         return subcategoriaCarneCategoriaCarnes;
+    }*/
+
+    public List<SubcategoriaCarneConContador> obtenerSubcategoriaCarneConContador() {
+        List<SubcategoriaCarneConContador> lista = new ArrayList<>();
+
+        lista.add(new SubcategoriaCarneConContador(
+                R.drawable.carne_animada,
+                SUBCATEGORIA_CARNE_TERNERA,
+                contarAlimentosPorSubcategoria(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_TERNERA)
+        ));
+        lista.add(new SubcategoriaCarneConContador(
+                R.drawable.carne_animada,
+                SUBCATEGORIA_CARNE_CERDO,
+                contarAlimentosPorSubcategoria(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_CERDO)
+        ));
+        lista.add(new SubcategoriaCarneConContador(
+                R.drawable.pollo,
+                SUBCATEGORIA_CARNE_POLLO,
+                contarAlimentosPorSubcategoria(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_POLLO)
+        ));
+        lista.add(new SubcategoriaCarneConContador(
+                R.drawable.pescado,
+                SUBCATEGORIA_CARNE_PESCADO,
+                contarAlimentosPorSubcategoria(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_PESCADO)
+        ));
+        lista.add(new SubcategoriaCarneConContador(
+                R.drawable.salchicha,
+                SUBCATEGORIA_CARNE_EMBUTIDO,
+                contarAlimentosPorSubcategoria(CATEGORIA_CARNE, SUBCATEGORIA_CARNE_EMBUTIDO)
+        ));
+
+        return lista;
     }
+
+
+    public LiveData<Integer> contarAlimentosPorSubcategoria(String categoria, String subcategoria) {
+        return db.alimentoDao().contarAlimentosPorSubcategoriaLiveData(categoria, subcategoria);
+    }
+
+    public LiveData<List<AlimentoDb>> buscarAlimentos(String query) {
+        return db.alimentoDao().buscarAlimentos(query);
+    }
+
+
 }

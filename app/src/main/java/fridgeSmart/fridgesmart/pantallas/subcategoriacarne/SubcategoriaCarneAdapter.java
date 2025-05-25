@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -14,11 +15,13 @@ import java.util.List;
 import fridgeSmart.fridgesmart.R;
 
 public class SubcategoriaCarneAdapter extends RecyclerView.Adapter<SubcategoriaCarneAdapter.ViewHolder> {
-    private List<SubcategoriaCarne> subcategoriaCarneList;
+    private List<SubcategoriaCarneConContador> subcategoriaCarneList;
+    private LifecycleOwner lifecycleOwner;
     private OnItemClickListener listener;//Interfaz para manejar clicks
 
-    public SubcategoriaCarneAdapter(List<SubcategoriaCarne> subcategoriaCarneList, OnItemClickListener listener) {
+    public SubcategoriaCarneAdapter(List<SubcategoriaCarneConContador> subcategoriaCarneList, LifecycleOwner lifecycleOwner,OnItemClickListener listener) {
         this.subcategoriaCarneList = subcategoriaCarneList;
+        this.lifecycleOwner=lifecycleOwner;
         this.listener = listener;
     }
 
@@ -32,13 +35,20 @@ public class SubcategoriaCarneAdapter extends RecyclerView.Adapter<SubcategoriaC
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        SubcategoriaCarne subcategoriaCarne = subcategoriaCarneList.get(position);
-        holder.imageView.setImageResource(subcategoriaCarne.getImageId());
-        holder.textViewTitle.setText(subcategoriaCarne.getNombre());
-        holder.textViewNumber.setText(String.valueOf(subcategoriaCarne.getCantidad()));
+        SubcategoriaCarneConContador subcategoriaCarne = subcategoriaCarneList.get(position);
+        holder.imageView.setImageResource(subcategoriaCarne.imagenResId);
+        holder.textViewTitle.setText(subcategoriaCarne.subcategoria);
 
-        // Verificar si el item pertenece a la categoría de "Carnes"
+        // OBSERVAMOS EL LiveData para actualizar el número dinámicamente
+        subcategoriaCarne.contador.observe(lifecycleOwner, cantidad ->{
+            holder.textViewNumber.setText(String.valueOf(cantidad));
+        });
+
+        // Click en todo el item
         holder.itemView.setOnClickListener(v -> listener.onItemClick(subcategoriaCarne));
+
+        // Click en la flecha también
+        holder.arrowButton.setOnClickListener(v -> listener.onItemClick(subcategoriaCarne));
     }
 
     @Override
@@ -48,7 +58,7 @@ public class SubcategoriaCarneAdapter extends RecyclerView.Adapter<SubcategoriaC
 
     //Interfaz para manejar los clicks en la flecha
     public interface OnItemClickListener{
-        void onItemClick(SubcategoriaCarne subcategoriaCarne);
+        void onItemClick(SubcategoriaCarneConContador subcategoriaCarne);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

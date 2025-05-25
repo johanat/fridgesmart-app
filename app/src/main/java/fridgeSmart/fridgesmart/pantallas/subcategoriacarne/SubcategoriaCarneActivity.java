@@ -25,9 +25,8 @@ public class SubcategoriaCarneActivity extends GestionAlimentosActivity {
         List<Carne> listaFiltrado = (List<Carne>) getIntent().getSerializableExtra("listaCarne");
 
         setContentView(R.layout.activity_subcategoria_carne);
+
         ImageView regresar = findViewById(R.id.backButton);
-
-
         // RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -36,20 +35,23 @@ public class SubcategoriaCarneActivity extends GestionAlimentosActivity {
         List<Carne> listaRecibida = (List<Carne>) getIntent().getSerializableExtra("listaCarne");
 
 
-        List<SubcategoriaCarne> subcategoriaCarneCategoriaCarnes = ((MyApp) getApplication()).repositorio.obtenerSubcategoriaCarne();
+        List<SubcategoriaCarneConContador> subcategoriaCarneCategoriaCarnes = ((MyApp) getApplication()).repositorio.obtenerSubcategoriaCarneConContador();
 
         regresar.setOnClickListener(view ->{
             finish();
         });
 
-        SubcategoriaCarneAdapter adapter = new SubcategoriaCarneAdapter(subcategoriaCarneCategoriaCarnes, new SubcategoriaCarneAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(SubcategoriaCarne subcategoriaCarne) {
-                Intent intent = new Intent(SubcategoriaCarneActivity.this, AlimentosActivity.class);
-                intent.putExtra(CATEGORIA, CATEGORIA_CARNE);
-                intent.putExtra(SUBCATEGORIA_CARNE,subcategoriaCarne.getNombre());
-                startActivity(intent);
-            }
+        SubcategoriaCarneAdapter adapter = new SubcategoriaCarneAdapter(
+                subcategoriaCarneCategoriaCarnes,
+                this,
+                new SubcategoriaCarneAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(SubcategoriaCarneConContador subcategoriaCarne) {
+                        Intent intent = new Intent(SubcategoriaCarneActivity.this, AlimentosActivity.class);
+                        intent.putExtra(CATEGORIA, CATEGORIA_CARNE);
+                        intent.putExtra(SUBCATEGORIA_CARNE,subcategoriaCarne.subcategoria);
+                        startActivity(intent);
+                }
         });
        recyclerView.setAdapter(adapter);
     }

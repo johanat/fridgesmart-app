@@ -1,5 +1,7 @@
 package fridgeSmart.fridgesmart.pantallas.anadiralimento;
 
+import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA_CARNE;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,47 +67,82 @@ public class AnadirAlimentoAdapter extends RecyclerView.Adapter<AnadirAlimentoAd
 
     @Override
     public void onBindViewHolder(@NonNull AnadirAlimentoAdapter.ViewHolder holder, int position) {
-        AlimentoDb AlimentoDb = alimentoEntityList.get(position);
+        AlimentoDb alimento  = alimentoEntityList.get(position);
 
-        holder.textName.setText(AlimentoDb.nombre);
-        holder.imageView.setImageResource(AlimentoDb.imagenId);
-        holder.checkBox.setChecked(AlimentoDb.selecionado);
+        holder.textName.setText(alimento.nombre);
+        holder.imageView.setImageResource(alimento.imagenId);
+        holder.checkBox.setChecked(alimento.selecionado);
 
         // Mostrar u ocultar campos adicionales según el estado
-        holder.extraFieldsLayout.setVisibility(AlimentoDb.selecionado ? View.VISIBLE : View.GONE);
+        holder.extraFieldsLayout.setVisibility(alimento.selecionado ? View.VISIBLE : View.GONE);
 
-        // Setear campos si ya tenían datos
-        String cantidad = AlimentoDb.cantidad > 0 ? String.valueOf(AlimentoDb.cantidad) : "";
-        String kilos = AlimentoDb.kilos > 0 ? String.valueOf(AlimentoDb.kilos) : "";
-        holder.editCantidad.setText(cantidad);
-        holder.editKilos.setText(kilos);
-        holder.editFecha.setText(AlimentoDb.fechaCaducidad);
+        // Configurar campos según categoría
+        if (CATEGORIA_CARNE.equalsIgnoreCase(alimento.categoria)) {
+            holder.layoutCarne.setVisibility(View.VISIBLE);
+            holder.layoutOtros.setVisibility(View.GONE);
+
+            // Setear valores existentes
+            String kilos = alimento.kilos > 0 ? String.valueOf(alimento.kilos) : "";
+            holder.editKilos.setText(kilos);
+            holder.editFecha.setText(alimento.fechaCaducidad != null ? alimento.fechaCaducidad : "");
+        } else {
+            holder.layoutCarne.setVisibility(View.GONE);
+            holder.layoutOtros.setVisibility(View.VISIBLE);
+
+            // Setear valores existentes
+            String cantidad = alimento.cantidad > 0 ? String.valueOf(alimento.cantidad) : "";
+            holder.editCantidad.setText(cantidad);
+            holder.editFechaOtros.setText(alimento.fechaCaducidad != null ? alimento.fechaCaducidad : "");
+        }
 
         holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            AlimentoDb.selecionado = isChecked;
+            alimento.selecionado = isChecked;
             holder.extraFieldsLayout.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-            selectionChangedListener.onSelectionChanged();
-        });
-
-        // Listeners para actualizar los datos del objeto
-        holder.editCantidad.addTextChangedListener(new SimpleTextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                AlimentoDb.cantidad = s.length() > 0 ? Integer.parseInt(s.toString()) : 0;
+            if (selectionChangedListener != null) {
+                selectionChangedListener.onSelectionChanged();
             }
         });
 
+        // Listeners para actualizar los datos
         holder.editKilos.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                AlimentoDb.kilos = s.length() > 0 ? Double.parseDouble(s.toString()) : 0.0;
+                try {
+                    alimento.kilos = s.length() > 0 ? Double.parseDouble(s.toString()) : 0.0;
+                } catch (NumberFormatException e) {
+                    alimento.kilos = 0.0;
+                }
+                if (selectionChangedListener != null) {
+                    selectionChangedListener.onSelectionChanged();
+                }
+            }
+        });
+
+        holder.editCantidad.addTextChangedListener(new SimpleTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try {
+                    alimento.cantidad = s.length() > 0 ? Integer.parseInt(s.toString()) : 0;
+                } catch (NumberFormatException e) {
+                    alimento.cantidad = 0;
+                }
+                if (selectionChangedListener != null) {
+                    selectionChangedListener.onSelectionChanged();
+                }
             }
         });
 
         holder.editFecha.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                AlimentoDb.fechaCaducidad = s.toString();
+                alimento.fechaCaducidad = s.toString();
+            }
+        });
+
+        holder.editFechaOtros.addTextChangedListener(new SimpleTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                alimento.fechaCaducidad = s.toString();
             }
         });
     }
@@ -120,7 +157,9 @@ public class AnadirAlimentoAdapter extends RecyclerView.Adapter<AnadirAlimentoAd
         ImageView imageView;
         TextView textName;
         LinearLayout extraFieldsLayout;
-        EditText editCantidad, editKilos, editFecha;
+        LinearLayout layoutCarne;
+        LinearLayout layoutOtros;
+        EditText editCantidad, editKilos, editFecha, editFechaOtros;
 
         ViewHolder(View view) {
             super(view);
@@ -128,9 +167,12 @@ public class AnadirAlimentoAdapter extends RecyclerView.Adapter<AnadirAlimentoAd
             imageView = view.findViewById(R.id.imageView);
             textName = view.findViewById(R.id.textName);
             extraFieldsLayout = view.findViewById(R.id.extraFieldsLayout);
+            layoutCarne = view.findViewById(R.id.layoutCarne);
+            layoutOtros = view.findViewById(R.id.layoutOtros);
             editCantidad = view.findViewById(R.id.editCantidad);
             editKilos = view.findViewById(R.id.editKilos);
             editFecha = view.findViewById(R.id.editFecha);
+            editFechaOtros = view.findViewById(R.id.editFechaOtros);
         }
     }
 }

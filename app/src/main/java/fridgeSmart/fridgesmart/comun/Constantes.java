@@ -8,7 +8,7 @@ public class Constantes {
     public static final String CATEGORIA_LACTEO = "Lacteo";
     public static final String CATEGORIA_FRUTA = "Fruta";
 
-    public static final String SUBCATEGORIA_CARNE = "Subcategoria Carne";
+    public static final String SUBCATEGORIA_CARNE = "subcategoria_carne";
     public static final String SUBCATEGORIA_CARNE_TERNERA = "Ternera";
     public static final String SUBCATEGORIA_CARNE_CERDO = "Cerdo";
     public static final String SUBCATEGORIA_CARNE_POLLO = "Pollo";

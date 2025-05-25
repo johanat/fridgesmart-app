@@ -29,4 +29,16 @@ public interface AlimentoDao {
     //Modificar alimento
     @Query("UPDATE AlimentoDb SET cantidad = :cantidad, kilos = :kilos, fechaCaducidad = :fechaCaducidad WHERE id = :id")
     void modificarAlimento(int id, int cantidad, double kilos, String fechaCaducidad);
+
+    //obtener el conteo de alimentos por subcategoria
+    @Query("SELECT COUNT(*) FROM AlimentoDb WHERE categoria = :categoria AND subcategoria = :subcategoria")
+    LiveData<Integer> contarAlimentosPorSubcategoriaLiveData(String categoria, String subcategoria);
+
+    @Query("SELECT * FROM AlimentoDb")
+    List<AlimentoDb> obtenerTodos();
+
+    // Nueva consulta para búsqueda general
+    @Query("SELECT * FROM AlimentoDb WHERE nombre LIKE '%' || :query || '%'")
+    LiveData<List<AlimentoDb>> buscarAlimentos(String query);
+
 }
