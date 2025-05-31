@@ -281,15 +281,6 @@ public class AlimentosActivity extends AppCompatActivity {
         }else if(selectedId == R.id.chipSortExpiry){
             //ordenamos por fecha de caducidad
             Collections.sort(filteredList, (a1, a2) -> DateUtils.compareDates(a1.fechaCaducidad, a2.fechaCaducidad));
-            /*Collections.sort(filteredList, (a1, a2) ->{
-                    try{
-                        Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(a1.fechaCaducidad);
-                        Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(a2.fechaCaducidad);
-                        return date1.compareTo(date2);
-                    }catch (ParseException e) {
-                        return;
-                    }
-            });*/
         }
         alimentosAdapter.actualizarLista(filteredList);
         toggleFilterMenu();
