@@ -43,11 +43,15 @@
             android:textSize="14sp" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/filterIcon"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_filtro" />
+            android:src="@drawable/ic_filtro"
+            android:contentDescription="Mostrar filtros"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/barraBusqueda"
+            app:layout_constraintBottom_toBottomOf="@id/barraBusqueda"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -91,5 +95,19 @@
         android:src="@drawable/ic_agregar"
         app:layout_constraintBottom_toTopOf="@id/btnEliminar"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <include
+        android:id="@+id/filterMenuContainer"
+        layout="@layout/filter_menu"
+        android:visibility="gone"
+        android:layout_width="280dp"
+        android:layout_height="500dp"
+        android:minHeight="500dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barraBusqueda"
+        android:layout_marginTop="8dp"
+        android:elevation="10dp"
+        android:background="@android:color/white"
+        android:outlineProvider="bounds"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

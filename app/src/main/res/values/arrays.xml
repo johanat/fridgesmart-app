@@ -1,0 +1,8 @@
+<resources>
+    <string-array name="quantity_filter_options">
+        <item>Todos</item>
+        <item>Bajo stock (&lt; 2 unidades)</item>
+        <item>Stock medio (2-5 unidades)</item>
+        <item>Stock alto (&gt; 5 unidades)</item>
+    </string-array>
+</resources>

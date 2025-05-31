@@ -22,7 +22,10 @@
             android:exported="false" />
         <activity
             android:name=".pantallas.alimentos.AlimentosActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".pantallas.recetasdetalle.RecetaSopaActivity"
             android:exported="false" />
@@ -51,6 +54,7 @@
         <activity android:name=".pantallas.subcategoriacarne.SubcategoriaCarneActivity" />
         <activity android:name=".pantallas.anadiralimento.AnadirAlimentosActivity" />
         <activity android:name=".pantallas.controltemperatura.ControlTemperaturasActivity" />
+
     </application>
 
 </manifest>

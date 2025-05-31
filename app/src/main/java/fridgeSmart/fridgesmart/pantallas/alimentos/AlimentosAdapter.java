@@ -3,6 +3,8 @@ package fridgeSmart.fridgesmart.pantallas.alimentos;
 import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA_CARNE;
 import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA_LACTEO;
 
+import android.content.res.Resources;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,7 +88,18 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.Alim
             holder.kilos.setText(alimento.cantidad + " uds");
         }
 
-        holder.imagenAlimento.setImageResource(alimento.imagenId);
+        try {
+            if (alimento.imagenId > 0) {
+                holder.imagenAlimento.setImageResource(alimento.imagenId);
+            } else {
+                // Imagen por defecto si no hay ID válido
+                holder.imagenAlimento.setImageResource(R.drawable.helado);
+            }
+        } catch (Resources.NotFoundException e) {
+            // Manejo de error si el recurso no existe
+            holder.imagenAlimento.setImageResource(R.drawable.helado);
+            Log.e("AlimentosAdapter", "Recurso de imagen no encontrado: " + alimento.imagenId);
+        }
         holder.checkBox.setOnCheckedChangeListener(null);
         holder.checkBox.setChecked(alimento.selecionado);
         holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {

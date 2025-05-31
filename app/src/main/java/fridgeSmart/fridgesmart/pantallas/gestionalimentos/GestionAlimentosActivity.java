@@ -30,7 +30,7 @@ public class GestionAlimentosActivity extends AppCompatActivity {
 
 
         flechaRetroceder.setOnClickListener(view ->{
-            Intent retroceder = new Intent(GestionAlimentosActivity.this, PrincipalActivity.class);
+            //Intent retroceder = new Intent(GestionAlimentosActivity.this, PrincipalActivity.class);
             finish();
         });
         iconoCarne.setOnClickListener(view -> {
