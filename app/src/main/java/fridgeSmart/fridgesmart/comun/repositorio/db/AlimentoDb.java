@@ -1,5 +1,7 @@
 package fridgeSmart.fridgesmart.comun.repositorio.db;
 
+import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA_CARNE;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -25,12 +27,16 @@ public class AlimentoDb {
         this.subcategoria = subcategoria;
         this.nombre = nombre;
         this.cantidad = cantidad;
-        this.kilos = kilos;
+        this.kilos = kilos;/*
+        if (!fechaCaducidad.matches("\\d{2}/\\d{2}/\\d{4}")) {
+            throw new IllegalArgumentException("Formato de fecha debe ser dd/MM/yyyy");
+        }*/
         this.fechaCaducidad = fechaCaducidad;
         this.selecionado = selecionado;
         this.descartado = descartado;
     }
     public boolean descartado() {
-        return cantidad <= 0 && kilos == 0.0;
+        return CATEGORIA_CARNE.equalsIgnoreCase(this.categoria) ?
+                kilos <= 0 : cantidad <= 0;
     }
 }

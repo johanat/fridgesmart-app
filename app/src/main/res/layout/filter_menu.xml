@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/gray_light"
+    android:minHeight="200dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/filterMenuScroll"
+        android:fillViewport="true"
+        android:layout_weight="1">
+
+
+        <LinearLayout
+            android:id="@+id/filterContentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:paddingBottom="80dp">
+
+            <!-- Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Filtrar alimentos"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/btnCloseFilter"
+                    android:layout_width="36dp"
+                    android:layout_height="33dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/close_filter"
+                    android:src="@drawable/ic_close2"
+                    app:tint="?android:attr/textColorSecondary" />
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <!-- Filtro por caducidad -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha de caducidad"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupExpiration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/filterAllDates"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Todos"
+                    android:checked="true"
+                    android:padding="12dp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/filterExpiringSoon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Próximos a caducar (esta semana)"
+                    android:padding="12dp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/filterExpired"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Caducados"
+                    android:padding="12dp" />
+
+                <!-- Opción de fecha específica - SIN LinearLayout -->
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/filterSpecificDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha específica"
+                    android:padding="12dp" />
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btnDatePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Seleccionar fecha"
+                android:visibility="gone"/>
+
+            <!-- Filtro por stock -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cantidad/Stock"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="8dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/spinnerQuantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:hint="Seleccionar filtro de stock" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Filtro por estado -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Estado"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchDiscarded"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mostrar solo descartados"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp" />
+
+            <!-- Ordenación -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ordenar por"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupSort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                app:singleSelection="true"
+                app:selectionRequired="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSortName"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre (A-Z)"
+                    android:checked="true" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSortExpiry"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha caducidad" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSortQuantity"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cantidad" />
+            </com.google.android.material.chip.ChipGroup>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Botones siempre visibles -->
+    <LinearLayout
+        android:layout_width="285dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/gray_light"
+        android:elevation="4dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnResetFilters"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/azul"
+            android:text="Reiniciar"
+            android:textColor="@color/on_red"
+            app:icon="@drawable/ic_reset"
+            app:iconGravity="textStart"
+            app:iconTint="@color/white" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnApplyFilters"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/azul"
+            android:text="Aplicar"
+            android:textColor="@color/on_red"
+            app:icon="@drawable/ic_filter_apply"
+            app:iconGravity="textStart"
+            app:iconTint="@color/white" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FridgeSmart</string>
+    <string name="filter_all_dates">Todos</string>
+    <string name="filter_expiring_soon">Próximos a caducar (esta semana)</string>
+    <string name="filter_expired">Caducados</string>
+    <string name="select_date">Seleccionar fecha</string>
+    <string name="close_filter">Cerrar filtro</string>
 </resources>

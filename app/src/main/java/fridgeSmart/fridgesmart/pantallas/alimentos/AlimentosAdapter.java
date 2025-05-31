@@ -3,6 +3,8 @@ package fridgeSmart.fridgesmart.pantallas.alimentos;
 import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA_CARNE;
 import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA_LACTEO;
 
+import android.content.res.Resources;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fridgeSmart.fridgesmart.R;
@@ -25,6 +28,7 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.Alim
     private List<AlimentoDb> alimentoEntities;
     public EnCambioSeleccionAlimentoEscuchador listener;
     private Integer idExpandido = null;
+    private List<AlimentoDb> listaOriginal;
 
     public interface EnGuardarAlimentoListener {
         void onGuardarAlimento(AlimentoDb alimento);
@@ -36,8 +40,14 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.Alim
                             EnCambioSeleccionAlimentoEscuchador listener,
                             EnGuardarAlimentoListener guardarListener) {
         this.alimentoEntities = alimentoEntities;
+        this.listaOriginal = new ArrayList<>(alimentoEntities);
         this.listener = listener;
         this.guardarListener = guardarListener;
+    }
+
+    public void actualizarLista(List<AlimentoDb> nuevaLista) {
+        this.alimentoEntities = nuevaLista;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -53,7 +63,7 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.Alim
 
         holder.nombre.setText(alimento.nombre);
         //mostrar kilos en carne y del resto alimentos cantidad  con un switch
-        switch(alimento.categoria){
+        /*switch(alimento.categoria){
             case CATEGORIA_CARNE:
                 holder.kilos.setText(alimento.kilos + " kg");
                 break;
@@ -69,8 +79,27 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.Alim
             default:
                 holder.kilos.setText(alimento.cantidad + " uds");
                 break;
+        }*/
+        if (CATEGORIA_CARNE.equalsIgnoreCase(alimento.categoria)) {
+            // SOLO PARA CARNES: Mostrar kilos (kg)
+            holder.kilos.setText(String.format("%.2f kg", alimento.kilos));
+        } else {
+            // PARA TODOS LOS DEMÁS (LÁCTEOS/FRUTAS/VERDURAS): Mostrar unidades (uds)
+            holder.kilos.setText(alimento.cantidad + " uds");
         }
-        holder.imagenAlimento.setImageResource(alimento.imagenId);
+
+        try {
+            if (alimento.imagenId > 0) {
+                holder.imagenAlimento.setImageResource(alimento.imagenId);
+            } else {
+                // Imagen por defecto si no hay ID válido
+                holder.imagenAlimento.setImageResource(R.drawable.helado);
+            }
+        } catch (Resources.NotFoundException e) {
+            // Manejo de error si el recurso no existe
+            holder.imagenAlimento.setImageResource(R.drawable.helado);
+            Log.e("AlimentosAdapter", "Recurso de imagen no encontrado: " + alimento.imagenId);
+        }
         holder.checkBox.setOnCheckedChangeListener(null);
         holder.checkBox.setChecked(alimento.selecionado);
         holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {

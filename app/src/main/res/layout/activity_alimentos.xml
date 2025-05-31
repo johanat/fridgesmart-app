@@ -4,18 +4,65 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="12dp">
+    android:padding="12dp"
+    android:background="@drawable/cuadrado_puntas_redondas">
+
+    <!-- Barra de búsqueda -->
 
     <!-- RecyclerView -->
+    <LinearLayout
+        android:id="@+id/barraBusqueda"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/buscador"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_buscador" />
+
+        <EditText
+            android:id="@+id/etBuscar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="8dp"
+            android:hint="¿Que estas buscando?"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/filterIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_filtro"
+            android:contentDescription="Mostrar filtros"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/barraBusqueda"
+            app:layout_constraintBottom_toBottomOf="@id/barraBusqueda"/>
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCarne"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barraBusqueda"
         app:layout_constraintBottom_toTopOf="@+id/btnAgregar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="48dp" />
+        android:layout_marginTop="16dp" />
 
     <!-- FloatingActionButtons: parte inferior derecha -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -48,5 +95,19 @@
         android:src="@drawable/ic_agregar"
         app:layout_constraintBottom_toTopOf="@id/btnEliminar"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <include
+        android:id="@+id/filterMenuContainer"
+        layout="@layout/filter_menu"
+        android:visibility="gone"
+        android:layout_width="280dp"
+        android:layout_height="500dp"
+        android:minHeight="500dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barraBusqueda"
+        android:layout_marginTop="8dp"
+        android:elevation="10dp"
+        android:background="@android:color/white"
+        android:outlineProvider="bounds"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
