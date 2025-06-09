@@ -11,6 +11,7 @@ import static fridgeSmart.fridgesmart.comun.Constantes.SUBCATEGORIA_CARNE_POLLO;
 import static fridgeSmart.fridgesmart.comun.Constantes.SUBCATEGORIA_CARNE_TERNERA;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
@@ -29,7 +30,8 @@ import fridgeSmart.fridgesmart.pantallas.subcategoriacarne.SubcategoriaCarneConC
 
 public class Repositorio {
     AppDatabase db;
-    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
+    //private final ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private final ExecutorService executorService;
 
     public List<AlimentoPredeterminado> obtenerTodsLosAlimentos() {
         List<AlimentoPredeterminado> alimentoEntityList = new ArrayList<>();
@@ -164,18 +166,18 @@ public class Repositorio {
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_FRUTA, null, R.drawable.frutas, "Chirimoya",  false,false));
 
         //Lacteos
-        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "Leche Entera", false,false));
-        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "Leche Desnatada", false,false));
-        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "Leche Semidesnatada", false,false));
+        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "leche Entera", false,false));
+        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "leche Desnatada", false,false));
+        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "leche Semidesnatada", false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "Yogur", false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "Queso Crema", false,false));
-        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "Mantequilla", false,false));
+        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "mantequilla", false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "Nata para Montar", false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "Yogurt Natural", false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "Queso de Cabra", false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "Queso de Azul", false,false));
-        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "Leche Condensada", false,false));
-        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "Leche Evaporada", false,false));
+        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "leche Condensada", false,false));
+        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "leche Evaporada", false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "Suero de Leche", false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_LACTEO, null, R.drawable.leche, "Mozzarella", false,false));
 
@@ -186,7 +188,9 @@ public class Repositorio {
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_VERDURA, null, R.drawable.verdura, "Cebolla", false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_VERDURA, null, R.drawable.verdura, "Zanahoria", false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_VERDURA, null, R.drawable.verdura, "Pimiento", false,false));
-        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_VERDURA, null, R.drawable.verdura, "Papa", false,false));
+        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_VERDURA, null, R.drawable.verdura, "Patatas", false,false));
+        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_VERDURA, null, R.drawable.verdura, "Albahaca", false,false));
+        alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_VERDURA, null, R.drawable.verdura, "Puerro", false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_VERDURA, null, R.drawable.verdura, "Espinaca", false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_VERDURA, null, R.drawable.verdura, "Brócoli", false,false));
         alimentoEntityList.add(new AlimentoPredeterminado(CATEGORIA_VERDURA, null, R.drawable.verdura, "Coliflor", false,false));
@@ -207,14 +211,20 @@ public class Repositorio {
     }
 
     public Repositorio(Context context) {
-        db = Room.databaseBuilder(context.getApplicationContext(),
-                AppDatabase.class, "fridge-smart")
-                .fallbackToDestructiveMigration()  // 👈 Añades esto aquí, luego hay q cambiarlo, es de prueba
-                .build();
+        db = AppDatabase.getInstance(context);
+        executorService = Executors.newSingleThreadExecutor();
+        Log.d("Repositorio", "Usando instancia de AppDatabase");
     }
 
     public void guardarAlimento(AlimentoDb alimentoDb) {
-        executorService.execute(() -> db.alimentoDao().guardarAlimento(alimentoDb));
+        executorService.execute(() -> {
+            try {
+                long id = db.alimentoDao().insert(alimentoDb);
+                Log.d("DEBUG_DB", "Alimento guardado con ID: " + id);
+            } catch (Exception e) {
+                Log.e("ERROR_DB", "Error al guardar: " + e.getMessage());
+            }
+        });
     }
 
     public void borrarAlimento(int id) {
@@ -232,18 +242,6 @@ public class Repositorio {
     public LiveData<List<AlimentoDb>> getAlimentosDeCategoria(String categoria) {
         return db.alimentoDao().getAlimentosDeCategoria(categoria);
     }
-
-/*
-    public List<SubcategoriaCarne> obtenerSubcategoriaCarne() {
-        List<SubcategoriaCarne> subcategoriaCarneCategoriaCarnes = new ArrayList<>();
-        subcategoriaCarneCategoriaCarnes.add(new SubcategoriaCarne(R.drawable.carne_animada, 5, SUBCATEGORIA_CARNE_TERNERA));
-        subcategoriaCarneCategoriaCarnes.add(new SubcategoriaCarne(R.drawable.carne_animada, 5, SUBCATEGORIA_CARNE_CERDO));
-        subcategoriaCarneCategoriaCarnes.add(new SubcategoriaCarne(R.drawable.pollo, 3, SUBCATEGORIA_CARNE_POLLO));
-        subcategoriaCarneCategoriaCarnes.add(new SubcategoriaCarne(R.drawable.pescado, 2, SUBCATEGORIA_CARNE_PESCADO));
-        subcategoriaCarneCategoriaCarnes.add(new SubcategoriaCarne(R.drawable.salchicha, 6, SUBCATEGORIA_CARNE_EMBUTIDO));
-
-        return subcategoriaCarneCategoriaCarnes;
-    }*/
 
     public List<SubcategoriaCarneConContador> obtenerSubcategoriaCarneConContador() {
         List<SubcategoriaCarneConContador> lista = new ArrayList<>();
@@ -277,7 +275,6 @@ public class Repositorio {
         return lista;
     }
 
-
     public LiveData<Integer> contarAlimentosPorSubcategoria(String categoria, String subcategoria) {
         return db.alimentoDao().contarAlimentosPorSubcategoriaLiveData(categoria, subcategoria);
     }
@@ -285,6 +282,5 @@ public class Repositorio {
     public LiveData<List<AlimentoDb>> buscarAlimentos(String query) {
         return db.alimentoDao().buscarAlimentos(query);
     }
-
 
 }

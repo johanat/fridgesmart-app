@@ -13,11 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import fridgeSmart.fridgesmart.MyApp;
-import fridgeSmart.fridgesmart.pantallas.alimentos.Carne;
 import fridgeSmart.fridgesmart.R;
 import fridgeSmart.fridgesmart.pantallas.alimentos.AlimentosActivity;
+import fridgeSmart.fridgesmart.pantallas.alimentos.Carne;
 import fridgeSmart.fridgesmart.pantallas.gestionalimentos.GestionAlimentosActivity;
-import fridgeSmart.fridgesmart.pantallas.principal.PrincipalActivity;
 
 public class SubcategoriaCarneActivity extends GestionAlimentosActivity {
     protected void onCreate(Bundle savedInstanceState) {

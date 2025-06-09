@@ -16,12 +16,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import fridgeSmart.fridgesmart.MyApp;
 import fridgeSmart.fridgesmart.R;
 import fridgeSmart.fridgesmart.comun.AlimentoMapper;
 import fridgeSmart.fridgesmart.comun.AlimentoPredeterminado;
 import fridgeSmart.fridgesmart.comun.repositorio.db.AlimentoDb;
+import fridgeSmart.fridgesmart.comun.repositorio.db.AppDatabase;
 import fridgeSmart.fridgesmart.notificaciones.CaducidadWorker;
 import fridgeSmart.fridgesmart.pantallas.principal.PrincipalActivity;
 
@@ -30,12 +33,17 @@ import static fridgeSmart.fridgesmart.comun.Constantes.CATEGORIA_CARNE;
 import static fridgeSmart.fridgesmart.comun.Constantes.SUBCATEGORIA_CARNE;
 public class AnadirAlimentosActivity extends AppCompatActivity {
 
+    private ExecutorService executorService;
+    private AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_anadir_alimentos);
+
+        executorService = Executors.newSingleThreadExecutor();
+        db = AppDatabase.getInstance(this);
 
         //obtenemos los extras
         String categoriaSeleccionada = getIntent().getStringExtra(CATEGORIA);
@@ -76,7 +84,6 @@ public class AnadirAlimentosActivity extends AppCompatActivity {
             boolean camposValidos = true;
 
             for (AlimentoDb alimento : seleccionados) {
-                Log.d("VALIDACION", "alimento: " + alimento.nombre + ", cantidad: " + alimento.cantidad + ", kilos: " + alimento.kilos + ", fecha: " + alimento.fechaCaducidad);
                 if (CATEGORIA_CARNE.equals(alimento.categoria)) {
                     // Validación para carnes (solo kilos)
                     if (alimento.kilos <= 0.0) {
@@ -99,22 +106,58 @@ public class AnadirAlimentosActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         btnAdd.setOnClickListener(v -> {
-            List<AlimentoDb> alimentosSeleccionados = adapter.getAlimentosSelecionados();
-            //Guardar cada elemento en la base de datos
-            for (AlimentoDb alimento : alimentosSeleccionados) {
-                //Aliment a guardar tiene que ser igual a alimento pero con el campo "select" en false
-                ((MyApp) getApplication()).repositorio.guardarAlimento(quitarSeleccion(alimento));
+            List<AlimentoDb> seleccionados = adapter.getAlimentosSelecionados();
+
+            if (seleccionados.isEmpty()) {
+                Toast.makeText(this, "Selecciona al menos un alimento", Toast.LENGTH_SHORT).show();
+                return;
             }
-            // Lanzar el worker para la notificación inmediata
-            OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(CaducidadWorker.class).build();
-            WorkManager.getInstance(this).enqueue(workRequest);
-            finish();
+
+            executorService.execute(() -> {
+                try {
+                    List<AlimentoDb> paraGuardar = new ArrayList<>();
+                    for (AlimentoDb alimento : seleccionados) {
+                        paraGuardar.add(quitarSeleccion(alimento));
+                    }
+                    db.alimentoDao().insertAll(paraGuardar);
+
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, "Alimentos guardados", Toast.LENGTH_SHORT).show();
+                        setResult(RESULT_OK); // Indica que la operación fue exitosa
+                        finish();
+                    });
+
+                } catch (Exception e) {
+                    Log.e("DB_ERROR", "Error al guardar: " + e.getMessage());
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show();
+                        setResult(RESULT_CANCELED);
+                    });
+                }
+            });
         });
     }
 
     private AlimentoDb quitarSeleccion(AlimentoDb alimento) {
-        // Crear una nueva instancia de AlimentoDb con el campo "select" en false
-        return new AlimentoDb(alimento.idAlimentoPredeterminado, alimento.imagenId, alimento.categoria, alimento.subcategoria, alimento.nombre, alimento.cantidad, alimento.kilos, alimento.fechaCaducidad, false,
-                false);
+        // Normalizar el nombre antes de guardar
+        String nombreNormalizado = alimento.nombre.toLowerCase().trim();
+        return new AlimentoDb(
+                alimento.idAlimentoPredeterminado,
+                alimento.imagenId,
+                alimento.categoria,
+                alimento.subcategoria,
+                nombreNormalizado,  // <-- Nombre normalizado
+                alimento.cantidad,
+                alimento.kilos,
+                alimento.fechaCaducidad,
+                false,
+                false
+        );
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // mos el executor cuando la actividad se destruya
+        executorService.shutdown();
     }
 }

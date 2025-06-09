@@ -11,7 +11,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="98dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp"
         android:background="#316986"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,9 +22,11 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="0dp"
             android:contentDescription="Volver"
+            android:visibility="visible"
             android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="#FFFFFF" />
@@ -137,24 +140,23 @@
 
     </LinearLayout>
 
+    <!-- Sección de Recetas Sugeridas -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/seccionRecetas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="400dp"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.699">
+        app:layout_constraintTop_toTopOf="@+id/linearLayout">
 
         <!-- Receta 1 -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/receta1"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:background="#e9edde"
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -164,24 +166,35 @@
             <ImageView
                 android:id="@+id/imageView11"
                 android:layout_width="46dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/plato_salmon"
+                android:layout_height="46dp"
+                android:src="@drawable/tortitas_americanas"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/nombreReceta1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Filete de salmón a la plancha"
+                android:text="Nombre Receta"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/descripcionReceta1"
+                app:layout_constraintEnd_toStartOf="@+id/flechaReceta1"
+                app:layout_constraintStart_toEndOf="@+id/imageView11"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/descripcionReceta1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Descripción"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/flechaReceta1"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/imageView11"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.538" />
+                app:layout_constraintTop_toBottomOf="@+id/nombreReceta1" />
 
             <ImageView
                 android:id="@+id/flechaReceta1"
@@ -197,7 +210,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/receta2"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:background="#e9edde"
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -207,22 +220,35 @@
             <ImageView
                 android:id="@+id/imageView9"
                 android:layout_width="46dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/tortitas_americanas"
+                android:layout_height="46dp"
+                android:src="@drawable/sopa_ternera"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/nombreReceta2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Tortitas Americanas"
+                android:text="Nombre Receta"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/descripcionReceta2"
                 app:layout_constraintEnd_toStartOf="@+id/flechaReceta2"
                 app:layout_constraintStart_toEndOf="@+id/imageView9"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/descripcionReceta2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Descripción"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/flechaReceta2"
+                app:layout_constraintStart_toEndOf="@+id/imageView9"
+                app:layout_constraintTop_toBottomOf="@+id/nombreReceta2" />
 
             <ImageView
                 android:id="@+id/flechaReceta2"
@@ -238,7 +264,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/receta3"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:background="#e9edde"
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -248,22 +274,35 @@
             <ImageView
                 android:id="@+id/imageView6"
                 android:layout_width="46dp"
-                android:layout_height="wrap_content"
+                android:layout_height="46dp"
                 android:src="@drawable/spagetti"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/nombreReceta3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Pasta Farfalle con Champiñones"
+                android:text="Nombre Receta"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/descripcionReceta3"
                 app:layout_constraintEnd_toStartOf="@+id/flechaReceta3"
                 app:layout_constraintStart_toEndOf="@+id/imageView6"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/descripcionReceta3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Descripción"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/flechaReceta3"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintTop_toBottomOf="@+id/nombreReceta3" />
 
             <ImageView
                 android:id="@+id/flechaReceta3"
@@ -279,7 +318,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/receta4"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:background="#e9edde"
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -289,22 +328,35 @@
             <ImageView
                 android:id="@+id/imageView7"
                 android:layout_width="46dp"
-                android:layout_height="wrap_content"
+                android:layout_height="46dp"
                 android:src="@drawable/sopa_ternera"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/nombreReceta4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Sopa de Ternera con Patatas y Verduras"
+                android:text="Nombre Receta"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/descripcionReceta4"
                 app:layout_constraintEnd_toStartOf="@+id/flechaReceta4"
                 app:layout_constraintStart_toEndOf="@+id/imageView7"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/descripcionReceta4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Descripción"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/flechaReceta4"
+                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintTop_toBottomOf="@+id/nombreReceta4" />
 
             <ImageView
                 android:id="@+id/flechaReceta4"
@@ -315,7 +367,5 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

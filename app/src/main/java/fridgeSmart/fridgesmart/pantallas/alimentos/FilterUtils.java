@@ -45,7 +45,7 @@ public class FilterUtils {
         }
 
         for (AlimentoDb item : list) {
-            int cantidad = item.cantidad; // Asumo que tienes un campo "cantidad" en AlimentoDb
+            int cantidad = item.cantidad;
 
             switch (stockFilter) {
                 case "Stock bajo (<2 unidades)":

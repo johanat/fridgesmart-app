@@ -3,6 +3,7 @@ package fridgeSmart.fridgesmart.comun.repositorio.db;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
@@ -22,6 +23,15 @@ public interface AlimentoDao {
     @Insert
     void guardarAlimento(AlimentoDb alimentoDb);
 
+    @Insert
+    long insert(AlimentoDb alimento);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAll(List<AlimentoDb> alimentos);
+
+    @Query("SELECT COUNT(*) FROM AlimentoDb")
+    int count();
+
     //Borrar alimento dado su id
     @Query("DELETE FROM AlimentoDb WHERE id = :id")
     void borrarAlimento(int id);
@@ -40,5 +50,11 @@ public interface AlimentoDao {
     // Nueva consulta para búsqueda general
     @Query("SELECT * FROM AlimentoDb WHERE nombre LIKE '%' || :query || '%'")
     LiveData<List<AlimentoDb>> buscarAlimentos(String query);
+
+
+    @Query("SELECT * FROM AlimentoDb")
+    LiveData<List<AlimentoDb>> obtenerTodosLiveData();
+
+
 
 }

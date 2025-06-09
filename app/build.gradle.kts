@@ -39,7 +39,7 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.common.jvm)
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
-    implementation ("androidx.recyclerview:recyclerview:1.3.0")
+    implementation ("androidx.recyclerview:recyclerview:1.3.2")
 
     implementation ("androidx.room:room-runtime:2.6.1")
     annotationProcessor ("androidx.room:room-compiler:2.6.1")
@@ -47,7 +47,13 @@ dependencies {
     implementation ("com.google.android.material:material:1.11.0")
     implementation ("androidx.appcompat:appcompat:1.6.1")
     implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
-
+    implementation ("com.squareup.okhttp3:okhttp:4.9.3")
+    annotationProcessor ("androidx.room:room-compiler:2.4.0")
+    implementation ("org.json:json:20210307")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
+    implementation ("androidx.room:room-runtime:2.4.0")
+    implementation ("androidx.cardview:cardview:1.0.0")
 
     // If this project only uses Java source, use the Java annotationProcessor
     // No additional plugins are necessary
