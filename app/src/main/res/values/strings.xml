@@ -4,5 +4,11 @@
     <string name="filter_expiring_soon">Próximos a caducar (esta semana)</string>
     <string name="filter_expired">Caducados</string>
     <string name="select_date">Seleccionar fecha</string>
-    <string name="close_filter">Cerrar filtro</string>
+    <string name="close_filter">Cerrar filtro</string><string name="back_button">Volver</string>
+    <string name="recipe_image">Imagen de la receta</string>
+    <string name="ingredients">Ingredientes:</string>
+    <string name="preparation">Preparación:</string>
+    <string name="imagen_receta">Imagen</string>
+    <string name="recetas">recetas</string>
+
 </resources>

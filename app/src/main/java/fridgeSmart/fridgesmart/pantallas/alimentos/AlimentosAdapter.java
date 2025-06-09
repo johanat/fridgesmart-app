@@ -63,23 +63,6 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.Alim
 
         holder.nombre.setText(alimento.nombre);
         //mostrar kilos en carne y del resto alimentos cantidad  con un switch
-        /*switch(alimento.categoria){
-            case CATEGORIA_CARNE:
-                holder.kilos.setText(alimento.kilos + " kg");
-                break;
-            case CATEGORIA_LACTEO:
-                if (alimento.nombre.equalsIgnoreCase("leche")) {
-                    holder.kilos.setText(alimento.kilos + " L");
-                } else if (alimento.nombre.toLowerCase().contains("yogur")) {
-                    holder.kilos.setText(alimento.cantidad + " uds");
-                } else {
-                    holder.kilos.setText(alimento.kilos + " kg");
-                }
-                break;
-            default:
-                holder.kilos.setText(alimento.cantidad + " uds");
-                break;
-        }*/
         if (CATEGORIA_CARNE.equalsIgnoreCase(alimento.categoria)) {
             // SOLO PARA CARNES: Mostrar kilos (kg)
             holder.kilos.setText(String.format("%.2f kg", alimento.kilos));

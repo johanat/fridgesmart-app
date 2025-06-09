@@ -57,39 +57,17 @@ public class PrincipalActivity extends AppCompatActivity {
                     != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 1001);
             }
-        }/*
-        @Override
-        public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-        @NonNull int[] grantResults) {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-            if (requestCode == 1001) {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Permiso concedido
-                    Toast.makeText(this, "Permiso de notificaciones concedido", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Permiso denegado
-                    Toast.makeText(this, "Las notificaciones estarán desactivadas", Toast.LENGTH_SHORT).show();
-                }
-            }
         }
-*/
-
-/*
-        // En PrincipalActivity.onCreate():
-        OneTimeWorkRequest notificacionTest =
-                new OneTimeWorkRequest.Builder(CaducidadWorker.class).build();
-        WorkManager.getInstance(this).enqueue(notificacionTest);*/
 
         PeriodicWorkRequest notificacionDiaria =
                 new PeriodicWorkRequest.Builder(CaducidadWorker.class, 24, TimeUnit.HOURS)
                         .build();
 
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
-                "NotificacionCaducidad",
-                ExistingPeriodicWorkPolicy.KEEP,  // Mantiene el trabajo existente si ya está programado
-                notificacionDiaria
-        );
+        OneTimeWorkRequest testNotificacion =
+                new OneTimeWorkRequest.Builder(CaducidadWorker.class).build();
+
+        WorkManager.getInstance(this).enqueue(testNotificacion);
+
 
         LinearLayout iconoGestionAlimentos = findViewById(R.id.iconGestionAliementos);
         LinearLayout iconoControlTemperatura = findViewById(R.id.icono_temperatura);

@@ -73,7 +73,6 @@ public class AlimentosActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_alimentos);
 
-        Log.d("AlimentosActivity", "onCreate - Categoría: " + categoriaAlimento);
 
         // Inicialización de vistas
         initViews();
@@ -233,9 +232,6 @@ public class AlimentosActivity extends AppCompatActivity {
                 "Stock medio (2-5 unidades)",
                 "Stock alto (>5 unidades)"
         };
-/*
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.quantity_filter_options, android.R.layout.simple_dropdown_item_1line);*/
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_dropdown_item,
@@ -382,13 +378,19 @@ public class AlimentosActivity extends AppCompatActivity {
         if (CATEGORIA_CARNE.equals(categoriaAlimento) && subcategoriaCarne != null) {
             intent.putExtra(SUBCATEGORIA_CARNE, subcategoriaCarne);
         }
-        // Añade estas flags para manejar correctamente la navegación
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivity(intent);
-
-        // Opcional: animación personalizada
-        //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        startActivityForResult(intent, 1); // Usamos requestCode 1 para agregar
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            // Forzar recarga de datos cuando se agregó un alimento
+            loadData();
+            Log.d("AlimentosActivity", "Recargando datos después de agregar alimento");
+        }
+    }
+
 
     private void onBtnModificarClick() {
         alimentosAdapter.editarItemSeleccionado();
@@ -415,12 +417,15 @@ public class AlimentosActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.d("AlimentosActivity", "onResume - Categoría: " + categoriaAlimento);
+        // Recargar datos cada vez que la actividad vuelva a primer plano
+        loadData();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         Log.d("AlimentosActivity", "onPause");
+        loadData();
     }
 
 }

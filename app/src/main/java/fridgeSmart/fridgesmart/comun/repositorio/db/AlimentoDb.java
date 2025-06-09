@@ -27,10 +27,7 @@ public class AlimentoDb {
         this.subcategoria = subcategoria;
         this.nombre = nombre;
         this.cantidad = cantidad;
-        this.kilos = kilos;/*
-        if (!fechaCaducidad.matches("\\d{2}/\\d{2}/\\d{4}")) {
-            throw new IllegalArgumentException("Formato de fecha debe ser dd/MM/yyyy");
-        }*/
+        this.kilos = kilos;
         this.fechaCaducidad = fechaCaducidad;
         this.selecionado = selecionado;
         this.descartado = descartado;
